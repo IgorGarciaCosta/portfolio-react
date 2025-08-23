@@ -2,16 +2,40 @@ import { ProjectCard } from "@/components/ProjectCard";
 
 const PROJECTS = [
   {
-    title: "VR Vehicle Prototype",
+    title: "Realtime mesh Exporter",
     description:
       "Interactive Unreal Engine application used at Ford to validate interior ergonomics and reduce physical mock-up cost.",
     videoSrc: "https://www.youtube.com/embed/rJmea9DGjjo",
   },
   {
-    title: "SkateNation XL – Multiplayer",
+    title: "OpenAI UE5 integration Plugin",
     description:
       "Implemented core skating mechanics, responsive UI for gamepad / keyboard and network optimisation for smooth online sessions.",
-    videoSrc: "https://www.youtube.com/embed/rJmea9DGjjo",
+    videoSrc: "https://www.youtube.com/embed/SM36E1veQto",
+  },
+  {
+    title: "VR bedroom simulation",
+    description:
+      "Interactive Unreal Engine application used at Ford to validate interior ergonomics and reduce physical mock-up cost.",
+    videoSrc: "https://www.youtube.com/embed/VUssMq4qAyk",
+  },
+  {
+    title: "Platform 2D game",
+    description:
+      "Implemented core skating mechanics, responsive UI for gamepad / keyboard and network optimisation for smooth online sessions.",
+    videoSrc: "https://www.youtube.com/embed/HTJ7bF0yzVs",
+  },
+  {
+    title: "Laser launcher robot",
+    description:
+      "Interactive Unreal Engine application used at Ford to validate interior ergonomics and reduce physical mock-up cost.",
+    videoSrc: "https://www.youtube.com/embed/Qf3frW3jAWk",
+  },
+  {
+    title: "Skateboarding prototype",
+    description:
+      "Implemented core skating mechanics, responsive UI for gamepad / keyboard and network optimisation for smooth online sessions.",
+    videoSrc: "https://www.youtube.com/embed/CL3kiYauUl0",
   },
   // add more projects here …
 ];

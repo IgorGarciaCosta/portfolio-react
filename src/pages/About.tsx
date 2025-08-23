@@ -7,16 +7,19 @@ export default function About() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="mx-auto max-w-3xl space-y-6"
+      /* flex-col + gap → espaçamento consistente, sem colapso */
+      className="mx-auto max-w-3xl flex flex-col gap-6"
     >
       <h1 className="text-3xl font-extrabold">About me</h1>
 
-      {/* Profile picture */}
-      <img
-        src={profileImg}
-        alt="Igor Garcia profile portrait"
-        className="mx-auto h-40 w-40 rounded-full object-cover shadow-lg dark:shadow-gray-800"
-      />
+      {/* Foto dentro de um wrapper para aplicar margin-bottom */}
+      <div className="flex justify-center mb-16">
+        <img
+          src={profileImg}
+          alt="Igor Garcia profile portrait"
+          className="h-40 w-40 rounded-full object-cover shadow-lg dark:shadow-gray-800"
+        />
+      </div>
 
       {/* ─────────────────────────── */}
       {/* Professional summary */}

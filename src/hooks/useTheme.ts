@@ -6,9 +6,13 @@ export const useTheme = () => {
   );
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    // Adiciona a classe "dark" quando o tema é dark, remove caso contrário
+    document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  return { theme, toggle: () => setTheme(t => (t === 'light' ? 'dark' : 'light')) };
+  return {
+    theme,
+    toggle: () => setTheme(t => (t === 'light' ? 'dark' : 'light')),
+  };
 };

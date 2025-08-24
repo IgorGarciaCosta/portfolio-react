@@ -1,9 +1,10 @@
-/* -------------- Contact.tsx (card invertido) -------------- */
+/* -------------- Contact.tsx (card com cores suaves) -------------- */
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { SiArtstation } from "react-icons/si";
 
+/* ---------- links & ícones ---------- */
 type ContactLink = {
   label: string;
   url: string;
@@ -36,6 +37,7 @@ const CONTACT_LINKS: ContactLink[] = [
   },
 ];
 
+/* ---------- tipo do formulário ---------- */
 type FormState = { name: string; email: string; message: string };
 
 export default function Contact() {
@@ -97,10 +99,10 @@ export default function Contact() {
 
         {/* -------- coluna direita (card) -------- */}
         <div className="mx-auto w-full max-w-lg">
-          {/* card invertido: escuro no tema claro, claro no tema escuro */}
-          <div className="rounded-lg bg-gray-900 p-6 text-gray-100 dark:bg-gray-50 dark:text-gray-900">
+          {/* card em tons suaves: claro no dark, escuro suave no light */}
+          <div className="rounded-lg bg-gray-100 p-6 text-gray-900 dark:bg-gray-800/80 dark:text-gray-100">
             {sent ? (
-              <p className="rounded bg-green-700/20 p-4 text-green-200 dark:bg-green-100 dark:text-green-700">
+              <p className="rounded bg-green-100/80 p-4 text-green-800 dark:bg-green-900/40 dark:text-green-200">
                 Thank you! Your message has been sent ✨
               </p>
             ) : (
@@ -114,7 +116,7 @@ export default function Contact() {
                     required
                     value={form.name}
                     onChange={handleChange}
-                    className="w-full rounded bg-gray-800 px-3 py-2 text-gray-100 placeholder-gray-400 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500"
+                    className="w-full rounded bg-white px-3 py-2 dark:bg-gray-900"
                     placeholder="Your name"
                   />
                 </div>
@@ -130,7 +132,7 @@ export default function Contact() {
                     required
                     value={form.email}
                     onChange={handleChange}
-                    className="w-full rounded bg-gray-800 px-3 py-2 text-gray-100 placeholder-gray-400 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500"
+                    className="w-full rounded bg-white px-3 py-2 dark:bg-gray-900"
                     placeholder="you@email.com"
                   />
                 </div>
@@ -146,7 +148,7 @@ export default function Contact() {
                     rows={5}
                     value={form.message}
                     onChange={handleChange}
-                    className="w-full resize-none rounded bg-gray-800 px-3 py-2 text-gray-100 placeholder-gray-400 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500"
+                    className="w-full resize-none rounded bg-white px-3 py-2 dark:bg-gray-900"
                     placeholder="How can I help you?"
                   />
                 </div>

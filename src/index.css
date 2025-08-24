@@ -12,3 +12,27 @@
     @apply bg-gray-900 text-gray-100;
   }
 }
+/* ---------- grid de pontinhos ---------- */
+@layer utilities {
+  .bg-dots {
+    /* ponto no canto da célula; raio controlado por --dot-size */
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--dot-color) var(--dot-size),
+      transparent 0
+    );
+    background-size: 48px 48px; /* espaçamento X e Y */
+  }
+}
+
+/* tema claro — ponto 2 px cinza-claro */
+html {
+  --dot-color: rgba(218, 218, 218, 0.884); /* gray-200 70 % */
+  --dot-size: 2px;                     /* raio = 2 px ⇒ ponto 4 px */
+}
+
+/* tema escuro — ponto 1 px cinza-600 */
+html.dark {
+  --dot-color: rgba(75, 85, 99, 0.753);   /* gray-600 45 % */
+  --dot-size: 1px;                     /* raio = 1 px ⇒ ponto 2 px */
+}

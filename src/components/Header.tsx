@@ -1,8 +1,19 @@
+// src/components/Header.tsx
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Header() {
-  /* classes compartilhadas dos links do menu */
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* ---------- links ---------- */
   const navItemClasses = ({ isActive }: { isActive: boolean }) =>
     [
       "relative rounded px-2 py-1 font-medium transition-colors",
@@ -11,16 +22,23 @@ export function Header() {
         : "text-inherit hover:text-blue-600 dark:hover:text-blue-400",
     ].join(" ");
 
+  /* ---------- header ---------- */
+  const headerClasses = [
+    "fixed inset-x-0 top-0 z-50 border-b-2 backdrop-blur-md transition-colors",
+    scrolled
+      ? "bg-white/90 dark:bg-gray-900/90 border-black/10 dark:border-white/10"
+      : "bg-transparent border-transparent",
+  ].join(" ");
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-md">
-      {/* ----- NAV: largura total, itens posicionados via absolute ----- */}
+    <header className={headerClasses}>
       <nav className="relative flex w-full items-center px-6 py-4">
-        {/* ------ Marca no canto ESQUERDO ------ */}
+        {/* Brand */}
         <Link to="/" className="absolute left-6 text-lg font-bold leading-none">
           Portfolio
         </Link>
 
-        {/* ------ MENU CENTRAL ------ */}
+        {/* Menu */}
         <ul className="mx-auto flex gap-6">
           <NavLink to="/about" className={navItemClasses}>
             About
@@ -33,7 +51,7 @@ export function Header() {
           </NavLink>
         </ul>
 
-        {/* ------ Toggle no canto DIREITO ------ */}
+        {/* Theme switch */}
         <div className="absolute right-6">
           <ThemeToggle />
         </div>

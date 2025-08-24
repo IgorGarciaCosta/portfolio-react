@@ -1,4 +1,4 @@
-/* -------------- Home.tsx -------------- */
+/* -------------- Home.tsx (hover “wipe” no botão de CV) -------------- */
 import { Link } from "react-router-dom";
 import ParticleBackground from "@/components/ParticleBackground";
 import TypewriterText from "@/components/TypewriterText";
@@ -11,14 +11,12 @@ export default function Home() {
       <div className="relative z-10 flex max-w-xl flex-col items-center gap-6 px-8 py-12 text-center">
         <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white md:text-6xl">
           Hi, I’m <span className="text-blue-600 dark:text-blue-400">Igor</span>
-          .
         </h1>
 
-        {/* ----------- texto com animação de digitação ----------- */}
         <TypewriterText
           text="Software Engineer"
-          speed={90} /* ajuste a gosto */
-          className="text-2xl md:text-3xl text-blue-700 dark:text-blue-300"
+          speed={90}
+          className="text-2xl text-blue-700 dark:text-blue-300 md:text-3xl"
         />
 
         <p className="text-lg text-slate-700 dark:text-slate-300">
@@ -27,28 +25,41 @@ export default function Home() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">
+          {/* ---------------- botão Projects (inalterado) ---------------- */}
           <Link
             to="/projects"
             className="
               inline-block rounded bg-blue-600 px-6 py-3 font-medium text-white
-              hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400
-              transition-colors
+              transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400
             "
           >
             See Projects
           </Link>
 
+          {/* ---------------- botão Download CV com animação “wipe” ---------------- */}
           <a
             href="/SoftwareEngineerCV.pdf"
             download
+            /* group = possibilita usar group-hover nos pseudo-elementos */
             className="
-              inline-block rounded border-2 border-blue-600 px-6 py-3 font-medium
-              text-blue-600 hover:bg-blue-600 hover:text-white
-              dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-white
-              transition-colors
+              group relative inline-block overflow-hidden rounded border-2
+              border-blue-600 px-6 py-3 font-medium text-blue-600
+              transition-colors dark:border-blue-400 dark:text-blue-400
             "
           >
-            Download CV
+            {/* pseudo-elemento 'before' faz o preenchimento da esquerda p/ a direita */}
+            <span
+              className="
+                pointer-events-none absolute inset-0 -z-10
+                origin-left scale-x-0
+                bg-blue-600 transition-transform duration-300 ease-out
+                group-hover:scale-x-100
+                dark:bg-blue-400
+              "
+            />
+            <span className="relative z-10 group-hover:text-white">
+              Download CV
+            </span>
           </a>
         </div>
       </div>

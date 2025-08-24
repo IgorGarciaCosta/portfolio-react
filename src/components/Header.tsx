@@ -34,8 +34,41 @@ export function Header() {
     <header className={headerClasses}>
       <nav className="relative flex w-full items-center px-6 py-4">
         {/* Brand */}
-        <Link to="/" className="absolute left-6 text-lg font-bold leading-none">
-          Portfolio
+        <Link
+          to="/"
+          className="absolute left-6 flex items-center"
+          aria-label="Igor Garcia – Home"
+        >
+          <svg
+            viewBox="0 0 100 100"
+            className="
+      h-10 w-10
+      text-blue-900          /* claro: azul escuro   */
+      dark:text-white        /* escuro: branco       */
+    "
+          >
+            {/* hexágono em contorno */}
+            <polygon
+              points="50 4 90 25 90 75 50 96 10 75 10 25"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="6"
+              strokeLinejoin="round"
+            />
+
+            {/* IG, mesma cor do contorno */}
+            <text
+              x="50"
+              y="63"
+              textAnchor="middle"
+              fontSize="46"
+              fontWeight="700"
+              className="fill-current"
+              fontFamily="Verdana, sans-serif"
+            >
+              IG
+            </text>
+          </svg>
         </Link>
 
         {/* Menu */}

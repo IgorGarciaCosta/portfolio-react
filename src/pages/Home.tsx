@@ -1,39 +1,53 @@
+// src/pages/Home.tsx   (ou onde estiver seu componente Home)
 import { Link } from "react-router-dom";
 import ParticleBackground from "@/components/ParticleBackground";
 
 export default function Home() {
   return (
-    /*
-      section: centraliza o conteúdo;
-      ParticleBackground fica full-screen atrás graças ao z-index -1.
-    */
+    /*  section: centraliza o conteúdo;
+        ParticleBackground ocupa a tela toda atrás (z-index -1) */
     <section className="relative grid min-h-[calc(100vh-6rem)] place-items-center">
-      {/* Fundo animado de partículas */}
       <ParticleBackground />
 
-      {/* Conteúdo principal */}
-      <div className="relative z-10 flex max-w-xl flex-col items-center gap-6 rounded-3xl bg-black/60 px-8 py-12 text-center backdrop-blur-md">
-        <h1 className="text-4xl font-extrabold text-white md:text-6xl">
-          Hi, I’m <span className="text-blue-400">Igor Garcia</span>.
+      {/* ───────────────────────────────────────────────────────
+          Conteúdo principal – sem painel escuro
+          cores se adaptam ao tema (light ↔ dark)
+         ─────────────────────────────────────────────────────── */}
+      <div className="relative z-10 flex max-w-xl flex-col items-center gap-6 px-8 py-12 text-center">
+        <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white md:text-6xl">
+          Hi, I’m <span className="text-blue-600 dark:text-blue-400">Igor</span>
+          .
         </h1>
 
-        <p className="text-lg text-gray-200">
+        <p className="text-lg text-slate-700 dark:text-slate-300">
           C++ engineer specialised in Games &amp; VR, now crafting
           high-performance web experiences.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">
+          {/* Botão primário */}
           <Link
             to="/projects"
-            className="inline-block rounded bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700"
+            className="
+              inline-block rounded bg-blue-600 px-6 py-3 font-medium text-white
+              hover:bg-blue-700
+              dark:bg-blue-500 dark:hover:bg-blue-400
+              transition-colors
+            "
           >
             See Projects
           </Link>
 
+          {/* Botão secundário */}
           <a
             href="/SoftwareEngineerCV.pdf"
             download
-            className="inline-block rounded border-2 border-blue-400 px-6 py-3 font-medium text-blue-400 hover:bg-blue-500 hover:text-white"
+            className="
+              inline-block rounded border-2 border-blue-600 px-6 py-3 font-medium
+              text-blue-600 hover:bg-blue-600 hover:text-white
+              dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-white
+              transition-colors
+            "
           >
             Download CV
           </a>

@@ -1,38 +1,18 @@
-import heroBg from "@/assets/bg-hero.jpg";
 import { Link } from "react-router-dom";
+import ParticleBackground from "@/components/ParticleBackground";
 
 export default function Home() {
   return (
+    /*
+      section: centraliza o conteúdo;
+      ParticleBackground fica full-screen atrás graças ao z-index -1.
+    */
     <section className="relative grid min-h-[calc(100vh-6rem)] place-items-center">
-      {/* 1) BACKGROUND EM FULLSCREEN (com fade vertical) */}
-      <div
-        className="pointer-events-none fixed inset-0 -z-30 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${heroBg})`,
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)",
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)",
-        }}
-      />
+      {/* Fundo animado de partículas */}
+      <ParticleBackground />
 
-      {/* 2) PAINEL PRETO TRANSLÚCIDO
-            • ocupa 100 vw (w-screen) e 45 vh de altura
-            • acompanha o scroll (absolute, não fixed)
-            • encosta nas laterais
-            • fade só em cima e embaixo */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-20 h-[45vh] w-screen -translate-x-1/2 -translate-y-1/2 bg-black/50"
-        style={{
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
-        }}
-      />
-
-      {/* 3) CONTEÚDO CENTRAL */}
-      <div className="relative z-10 flex max-w-xl flex-col items-center gap-6 rounded-3xl px-8 py-12 text-center">
+      {/* Conteúdo principal */}
+      <div className="relative z-10 flex max-w-xl flex-col items-center gap-6 rounded-3xl bg-black/60 px-8 py-12 text-center backdrop-blur-md">
         <h1 className="text-4xl font-extrabold text-white md:text-6xl">
           Hi, I’m <span className="text-blue-400">Igor Garcia</span>.
         </h1>

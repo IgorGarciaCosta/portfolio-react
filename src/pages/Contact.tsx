@@ -1,18 +1,14 @@
+/* -------------- Contact.tsx (card invertido) -------------- */
 import { useState } from "react";
 import { motion } from "framer-motion";
-
-/* react-icons – apenas os ícones necessários (tree-shaking no build) */
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { SiArtstation } from "react-icons/si";
 
-/* -------------------------------------------------------------
- * Contact links + icons.  O tipo React.ReactNode aceita qualquer
- * JSX, então podemos armazenar o ícone junto com label e url.
- * ------------------------------------------------------------*/
 type ContactLink = {
   label: string;
   url: string;
-  color: string;
+  bg: string;
+  fg: string;
   icon: React.ReactNode;
 };
 
@@ -20,29 +16,27 @@ const CONTACT_LINKS: ContactLink[] = [
   {
     label: "LinkedIn",
     url: "https://www.linkedin.com/in/igor-garcia-5a449a1b5/",
-    color: "text-blue-600 dark:text-blue-400",
+    bg: "bg-blue-100 dark:bg-blue-900/40",
+    fg: "text-blue-700 dark:text-blue-300",
     icon: <FaLinkedin />,
   },
   {
     label: "GitHub",
     url: "https://github.com/IgorGarciaCosta",
-    color: "text-gray-800 dark:text-gray-200",
+    bg: "bg-gray-200 dark:bg-gray-800/60",
+    fg: "text-gray-800 dark:text-gray-200",
     icon: <FaGithub />,
   },
   {
     label: "ArtStation",
     url: "https://igorgarcia6.artstation.com/",
-    color: "text-pink-600 dark:text-pink-400",
+    bg: "bg-pink-100 dark:bg-pink-900/40",
+    fg: "text-pink-600 dark:text-pink-400",
     icon: <SiArtstation />,
   },
 ];
 
-/* -------------------- form state type ---------------------*/
-type FormState = {
-  name: string;
-  email: string;
-  message: string;
-};
+type FormState = { name: string; email: string; message: string };
 
 export default function Contact() {
   const [form, setForm] = useState<FormState>({
@@ -58,7 +52,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: integrate with EmailJS / Formspree / API
+    // TODO: integrar com backend / EmailJS
     setSent(true);
   };
 
@@ -67,92 +61,108 @@ export default function Contact() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="mx-auto max-w-xl space-y-8"
+      className="mx-auto flex min-h-[calc(100vh-6rem)] items-center px-4"
     >
-      <h1 className="text-3xl font-extrabold">Contact</h1>
+      <div className="mx-auto w-full max-w-5xl md:grid md:grid-cols-2 md:gap-12">
+        {/* -------- coluna esquerda -------- */}
+        <div className="mb-12 flex flex-col items-center gap-8 text-center md:mb-0 md:items-start md:text-left">
+          <header className="space-y-4">
+            <h1 className="text-3xl font-extrabold">Let&apos;s Connect!</h1>
+            <p className="max-w-xs text-gray-600 dark:text-gray-300">
+              I&apos;m always open to discussing new opportunities, interesting
+              projects, or just having a chat about technology and development.
+            </p>
+          </header>
 
-      {/* ---------- static links with icons ---------- */}
-      <div className="space-y-2">
-        <h2 className="text-xl font-semibold">Reach me at</h2>
+          <ul className="flex gap-6">
+            {CONTACT_LINKS.map((l) => (
+              <li key={l.label}>
+                <a
+                  href={l.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={l.label}
+                  className={`
+                    ${l.bg} ${l.fg}
+                    flex h-14 w-14 items-center justify-center rounded-full
+                    text-2xl transition-transform hover:scale-110
+                  `}
+                >
+                  {l.icon}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        <ul className="flex flex-col gap-1">
-          {CONTACT_LINKS.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center gap-2 underline-offset-4 hover:underline ${link.color}`}
-              >
-                {/* Ícone */}
-                <span className="text-lg">{link.icon}</span>
-                {/* Texto */}
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {/* -------- coluna direita (card) -------- */}
+        <div className="mx-auto w-full max-w-lg">
+          {/* card invertido: escuro no tema claro, claro no tema escuro */}
+          <div className="rounded-lg bg-gray-900 p-6 text-gray-100 dark:bg-gray-50 dark:text-gray-900">
+            {sent ? (
+              <p className="rounded bg-green-700/20 p-4 text-green-200 dark:bg-green-100 dark:text-green-700">
+                Thank you! Your message has been sent ✨
+              </p>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Name */}
+                <div>
+                  <label className="mb-1 block text-sm font-medium">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={form.name}
+                    onChange={handleChange}
+                    className="w-full rounded bg-gray-800 px-3 py-2 text-gray-100 placeholder-gray-400 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500"
+                    placeholder="Your name"
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="mb-1 block text-sm font-medium">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                    className="w-full rounded bg-gray-800 px-3 py-2 text-gray-100 placeholder-gray-400 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500"
+                    placeholder="you@email.com"
+                  />
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="mb-1 block text-sm font-medium">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    required
+                    rows={5}
+                    value={form.message}
+                    onChange={handleChange}
+                    className="w-full resize-none rounded bg-gray-800 px-3 py-2 text-gray-100 placeholder-gray-400 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500"
+                    placeholder="How can I help you?"
+                  />
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  className="w-full rounded bg-blue-600 px-6 py-2 font-medium text-white hover:bg-blue-700"
+                >
+                  Submit
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
-
-      {/* -------------- feedback after submit --------------*/}
-      {sent ? (
-        <p className="rounded bg-green-100 p-4 text-green-700 dark:bg-green-900/40 dark:text-green-300">
-          Thank you! Your message has been sent ✨
-        </p>
-      ) : (
-        /* ------------------ contact form ------------------*/
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name */}
-          <div>
-            <label className="mb-1 block text-sm font-medium">Name</label>
-            <input
-              type="text"
-              name="name"
-              required
-              value={form.name}
-              onChange={handleChange}
-              className="w-full rounded border border-gray-300 px-3 py-2 dark:border-gray-700 dark:bg-gray-800"
-              placeholder="Your name"
-            />
-          </div>
-
-          {/* Email */}
-          <div>
-            <label className="mb-1 block text-sm font-medium">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={form.email}
-              onChange={handleChange}
-              className="w-full rounded border border-gray-300 px-3 py-2 dark:border-gray-700 dark:bg-gray-800"
-              placeholder="you@email.com"
-            />
-          </div>
-
-          {/* Message */}
-          <div>
-            <label className="mb-1 block text-sm font-medium">Message</label>
-            <textarea
-              name="message"
-              required
-              rows={5}
-              value={form.message}
-              onChange={handleChange}
-              className="w-full resize-none rounded border border-gray-300 px-3 py-2 dark:border-gray-700 dark:bg-gray-800"
-              placeholder="How can I help you?"
-            />
-          </div>
-
-          {/* Submit */}
-          <button
-            type="submit"
-            className="rounded bg-blue-600 px-6 py-2 font-medium text-white hover:bg-blue-700"
-          >
-            Submit
-          </button>
-        </form>
-      )}
     </motion.section>
   );
 }

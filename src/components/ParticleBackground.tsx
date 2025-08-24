@@ -1,5 +1,5 @@
 // src/components/ParticleBackground.tsx
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Particles from "@tsparticles/react";
 import { loadAll } from "@tsparticles/all";
 import {
@@ -9,29 +9,47 @@ import {
 } from "@tsparticles/engine";
 
 export default function ParticleBackground() {
-  /* flag local para evitar múltiplos carregamentos em dev-reload */
-  const loadedRef = useRef(false);
-
+  /* 1. carrega o preset uma única vez */
+  const presetLoaded = useRef(false);
   useEffect(() => {
-    if (!loadedRef.current) {
+    if (!presetLoaded.current) {
       loadAll(tsParticles as unknown as Engine).finally(() => {
-        loadedRef.current = true;
+        presetLoaded.current = true;
       });
     }
   }, []);
 
-  const options = useMemo<ISourceOptions>(
-    () => ({
+  /* 2. detecta tema (dark class em <html>) */
+  const [isDark, setIsDark] = useState<boolean>(
+    () =>
+      typeof document !== "undefined" &&
+      document.documentElement.classList.contains("dark")
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() =>
+      setIsDark(document.documentElement.classList.contains("dark"))
+    );
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  /* 3. opções do tsParticles (re-cria quando a cor muda) */
+  const options = useMemo<ISourceOptions>(() => {
+    const darkColor = "#ffffff"; // partículas claras p/ fundo escuro
+    const lightColor = "#0f172a"; // partículas escuras p/ fundo claro
+
+    return {
       fullScreen: { enable: true, zIndex: -1 },
       fpsLimit: 60,
       particles: {
-        number: {
-          value: 120,
-          density: { enable: true, width: 900 },
-        },
+        number: { value: 120, density: { enable: true, width: 900 } },
+        color: { value: isDark ? darkColor : lightColor },
         opacity: { value: { min: 0.4, max: 0.8 } },
         size: { value: { min: 1, max: 4 } },
-        color: { value: "#ffffff" },
         shape: { type: "circle" },
         move: {
           enable: true,
@@ -52,9 +70,15 @@ export default function ParticleBackground() {
         },
       },
       detectRetina: true,
-    }),
-    []
-  );
+    } satisfies ISourceOptions;
+  }, [isDark]);
 
-  return <Particles id="tsparticles" options={options} />;
+  /* 4. key={isDark} força recriação do canvas quando o tema muda */
+  return (
+    <Particles
+      id="tsparticles"
+      options={options}
+      key={isDark ? "dark" : "light"}
+    />
+  );
 }

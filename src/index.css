@@ -36,3 +36,8 @@ html.dark {
   --dot-color: rgba(75, 85, 99, 0.753);   /* gray-600 45 % */
   --dot-size: 1px;                     /* raio = 1 px ⇒ ponto 2 px */
 }
+
+/* scroll suave para anchors/scrollIntoView */
+html {
+  scroll-behavior: smooth;
+}

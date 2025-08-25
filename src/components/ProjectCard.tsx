@@ -1,40 +1,62 @@
+/* ----------------- components/ProjectCard.tsx ----------------- */
 import { ResponsiveIframe } from "@/components/ResponsiveIframe";
+import clsx from "clsx";
+
+/* gera URL de thumbnail do YouTube (sempre existe a hqdefault) */
+function ytThumb(embed: string) {
+  const id = embed.split("/embed/")[1]?.split("?")[0] ?? "";
+  return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+}
 
 type Props = {
   title: string;
   description: string;
   videoSrc: string;
+  shrink?: boolean; // => cartão lateral
+  active?: boolean; // => cartão central
+  [key: string]: unknown;
 };
 
-export function ProjectCard({ title, description, videoSrc }: Props) {
+export function ProjectCard({
+  title,
+  description,
+  videoSrc,
+  shrink,
+  active,
+  ...rest
+}: Props) {
   return (
     <article
-      /* container do card */
-      className="group relative mx-auto w-full max-w-3xl overflow-hidden
-                 flex flex-col gap-6 rounded-lg p-6 md:flex-row"
+      {...rest}
+      className={clsx(
+        "flex flex-col overflow-hidden rounded-xl shadow-md transition-all duration-300",
+        "bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-gray-100",
+        shrink
+          ? "scale-90 opacity-40 brightness-75 hover:opacity-60"
+          : "scale-100 opacity-100"
+      )}
     >
-      {/* ───── GRADIENT OVERLAY QUE SE MOVE ───── */}
-      <span
-        className="
-          pointer-events-none
-          absolute top-0 right-0 h-full w-full
-          translate-x-full opacity-0  /* começa fora do card, invisível   */
-          bg-gradient-to-l from-blue-600/25 to-transparent
-          transition-all duration-500 ease-out             /* move + fade */
-          group-hover:translate-x-0 group-hover:opacity-100
-          dark:from-blue-500/30
-        "
-      />
-
-      {/* lado esquerdo – título + descrição */}
-      <div className="flex-1 space-y-2">
-        <h3 className="text-2xl font-semibold">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-300">{description}</p>
-      </div>
-
-      {/* lado direito – player */}
-      <div className="mx-auto w-full max-w-xl md:mx-0 md:w-96">
+      {/* vídeo (só se for o cartão ativo)  */}
+      {active ? (
         <ResponsiveIframe src={videoSrc} title={title} />
+      ) : (
+        <img
+          src={ytThumb(videoSrc)}
+          alt={`${title} thumbnail`}
+          className="aspect-video w-full object-cover pointer-events-none"
+          /* se, por acaso, a imagem falhar -> cor sólida */
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).style.background =
+              "rgba(0,0,0,0.4)";
+          }}
+        />
+      )}
+
+      <div className="space-y-2 p-4">
+        <h3 className="text-xl font-semibold">{title}</h3>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+          {description}
+        </p>
       </div>
     </article>
   );

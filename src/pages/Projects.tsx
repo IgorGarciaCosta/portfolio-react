@@ -115,7 +115,7 @@ export default function Projects() {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ type: "spring", stiffness: 120, damping: 20 }}
+            transition={{ type: "tween", duration: 0.25, ease: "easeOut" }}
             className="relative z-20 w-[85%] sm:w-[70%] lg:w-[60%]"
           >
             <ProjectCard {...PROJECTS[index]} active />

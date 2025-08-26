@@ -92,11 +92,17 @@ export default function Projects() {
                      cursor-pointer select-none"
           onClick={prev}
         >
-          {/* seta (mobile only) */}
-          <FaChevronLeft
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl
-                       text-blue-600 sm:hidden pointer-events-none"
-          />
+          {/* seta + halo (mobile only) */}
+          <span
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+               flex items-center justify-center sm:hidden pointer-events-none
+               h-12 w-12" /* área total do halo */
+          >
+            {/* halo borrado */}
+            <span className="absolute inset-0 rounded-full bg-black/100 blur-sm" />
+            {/* seta branca 100 % */}
+            <FaChevronLeft size={20} className="relative z-10 text-white" />
+          </span>
           <ProjectCard {...PROJECTS[prevIdx]} shrink />
         </div>
 
@@ -122,11 +128,15 @@ export default function Projects() {
                      sm:w-56 lg:w-64 cursor-pointer select-none"
           onClick={next}
         >
-          {/* seta (mobile only) */}
-          <FaChevronRight
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl
-                       text-blue-600 sm:hidden pointer-events-none"
-          />
+          {/* seta + halo (mobile only) */}
+          <span
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+               flex items-center justify-center sm:hidden pointer-events-none
+               h-12 w-12"
+          >
+            <span className="absolute inset-0 rounded-full bg-black/100 blur-sm" />
+            <FaChevronRight size={20} className="relative z-10 text-white" />
+          </span>
           <ProjectCard {...PROJECTS[nextIdx]} shrink />
         </div>
       </div>

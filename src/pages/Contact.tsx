@@ -54,9 +54,18 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: integrar com backend / EmailJS
+    // TODO: integrar com backend
     setSent(true);
   };
+
+  /* ------- parâmetros da animação ------- */
+  const bounce = { y: [0, -36, 0] }; // salto (≈ 16 px)
+  const bounceDuration = 0.5; // duração do salto
+  const stagger = 0.3; // intervalo entre ícones
+  const totalCycle = 3; // todo o ciclo dura 3 s
+  const commonRepeatDelay =
+    totalCycle - bounceDuration - (CONTACT_LINKS.length - 1) * stagger;
+  // 3 - 0.5 - 0.6 = 1.9 s de pausa em todos
 
   return (
     <motion.section
@@ -76,10 +85,11 @@ export default function Contact() {
             </p>
           </header>
 
+          {/* -------- ícones com animação -------- */}
           <ul className="flex gap-6">
-            {CONTACT_LINKS.map((l) => (
-              <li key={l.label}>
-                <a
+            {CONTACT_LINKS.map((l, idx) => (
+              <motion.li key={l.label}>
+                <motion.a
                   href={l.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -89,17 +99,24 @@ export default function Contact() {
                     flex h-14 w-14 items-center justify-center rounded-full
                     text-2xl transition-transform hover:scale-110
                   `}
+                  animate={bounce}
+                  transition={{
+                    duration: bounceDuration,
+                    delay: idx * stagger, // 0 s, 0.3 s, 0.6 s …
+                    repeat: Infinity,
+                    repeatDelay: commonRepeatDelay,
+                    ease: "easeInOut",
+                  }}
                 >
                   {l.icon}
-                </a>
-              </li>
+                </motion.a>
+              </motion.li>
             ))}
           </ul>
         </div>
 
         {/* -------- coluna direita (card) -------- */}
         <div className="mx-auto w-full max-w-lg">
-          {/* card em tons suaves: claro no dark, escuro suave no light */}
           <div className="rounded-lg bg-gray-100 p-6 text-gray-900 dark:bg-gray-800/80 dark:text-gray-100">
             {sent ? (
               <p className="rounded bg-green-100/80 p-4 text-green-800 dark:bg-green-900/40 dark:text-green-200">
@@ -107,7 +124,6 @@ export default function Contact() {
               </p>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Name */}
                 <div>
                   <label className="mb-1 block text-sm font-medium">Name</label>
                   <input
@@ -121,7 +137,6 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* Email */}
                 <div>
                   <label className="mb-1 block text-sm font-medium">
                     Email
@@ -137,7 +152,6 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* Message */}
                 <div>
                   <label className="mb-1 block text-sm font-medium">
                     Message
@@ -153,7 +167,6 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* Submit */}
                 <button
                   type="submit"
                   className="w-full rounded bg-blue-600 px-6 py-2 font-medium text-white hover:bg-blue-700"

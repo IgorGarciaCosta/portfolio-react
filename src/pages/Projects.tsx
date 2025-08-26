@@ -8,37 +8,37 @@ const PROJECTS = [
   {
     title: "Realtime mesh Exporter",
     description:
-      "Interactive Unreal Engine application used at Ford to validate interior ergonomics and reduce physical mock-up cost.",
+      "Unreal engine application of a new technology that still didnt exist on the market that allows users to export skinned meshes in runtime. Published on unreal marketplace.",
     videoSrc: "https://www.youtube.com/embed/rJmea9DGjjo",
   },
   {
     title: "OpenAI UE5 integration Plugin",
     description:
-      "Implemented core skating mechanics, responsive UI for gamepad / keyboard and network optimisation for smooth online sessions.",
+      "UE pluhin of integration between the editor and OepnAI services, allowing users to generate text, images and code using AI.",
     videoSrc: "https://www.youtube.com/embed/SM36E1veQto",
   },
   {
     title: "VR bedroom simulation",
     description:
-      "Interactive Unreal Engine application used at Ford to validate interior ergonomics and reduce physical mock-up cost.",
+      "Simulation of a bedroom in VR using Unreal Engine, with interactive objects and realistic lighting.",
     videoSrc: "https://www.youtube.com/embed/VUssMq4qAyk",
   },
   {
     title: "Platform 2D game",
     description:
-      "Implemented core skating mechanics, responsive UI for gamepad / keyboard and network optimisation for smooth online sessions.",
+      "Project featuring a 2D platform game with character movement, animations, enemies, collectibles, and differnet level mechanics.",
     videoSrc: "https://www.youtube.com/embed/HTJ7bF0yzVs",
   },
   {
     title: "Laser launcher robot",
     description:
-      "Interactive Unreal Engine application used at Ford to validate interior ergonomics and reduce physical mock-up cost.",
+      "Multidisplinary project where I designed 3D modleed, texturized and built a robot capable of moving and shooting a laser at targets. With realistic lighting and destrcution effects",
     videoSrc: "https://www.youtube.com/embed/Qf3frW3jAWk",
   },
   {
     title: "Skateboarding prototype",
     description:
-      "Implemented core skating mechanics, responsive UI for gamepad / keyboard and network optimisation for smooth online sessions.",
+      "Implemented core skating mechanics, responsive UI for gamepad / keyboard as a 2 days challenge.",
     videoSrc: "https://www.youtube.com/embed/CL3kiYauUl0",
   },
 ];

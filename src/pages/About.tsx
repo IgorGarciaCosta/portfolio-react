@@ -160,16 +160,6 @@ export default function About() {
       {/* --------------------------- card + foto --------------------------- */}
       <div className="flex flex-col items-center gap-10 md:flex-row">
         <motion.div
-          variants={cardVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          className="w-full rounded-lg p-6 md:flex-1 bg-gray-100 text-gray-900 dark:bg-gray-800/80 dark:text-gray-100"
-        >
-          {summary}
-        </motion.div>
-
-        <motion.div
           variants={photoVariants}
           initial="hidden"
           whileInView="show"
@@ -185,6 +175,16 @@ export default function About() {
             transition={{ type: "spring", stiffness: 150, damping: 12 }}
             className="relative h-full w-full rounded-lg object-cover shadow-lg"
           />
+        </motion.div>
+
+        <motion.div
+          variants={cardVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="w-full rounded-lg p-6 md:flex-1 bg-gray-100 text-gray-900 dark:bg-gray-800/80 dark:text-gray-100"
+        >
+          {summary}
         </motion.div>
       </div>
 

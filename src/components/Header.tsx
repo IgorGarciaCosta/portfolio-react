@@ -17,15 +17,17 @@ export function Header({ current, onNav }: Props) {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  /* classe dos itens de navegação */
+  /* -------- classe dos itens de navegação -------- */
   const navClasses = (key: Props["current"]) =>
     [
-      "relative rounded px-2 py-1 font-medium transition-colors cursor-pointer select-none",
+      "cursor-pointer select-none px-2 pb-1 font-medium transition-colors",
+      "border-b-2", // traço na base
       current === key
-        ? "text-blue-900 dark:text-white bg-gradient-to-t from-blue-600/60 to-blue-600/0 dark:from-blue-500/50"
-        : "text-inherit hover:text-blue-600 dark:hover:text-blue-400",
+        ? "border-blue-600 text-blue-900 dark:text-white" // ativo
+        : "border-transparent hover:border-blue-600 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400",
     ].join(" ");
 
+  /* -------- classe do header -------- */
   const headerClasses = [
     "fixed inset-x-0 top-0 z-50 border-b-2 backdrop-blur-md transition-colors",
     scrolled
@@ -42,7 +44,6 @@ export function Header({ current, onNav }: Props) {
           className="absolute left-6 flex cursor-pointer items-center"
           aria-label="Igor Garcia — Home"
         >
-          {/* hexágono + IG (mesmo SVG de antes) */}
           <svg
             viewBox="0 0 100 100"
             className="h-10 w-10 text-blue-900 dark:text-white"

@@ -41,3 +41,29 @@ html.dark {
 html {
   scroll-behavior: smooth;
 }
+
+/* ------------------------------------------------------------------ */
+/* utilitário: .mask-fade-top                                         */
+/* cria um gradiente de transparência → opaco nos primeiros 200 px     */
+/* ------------------------------------------------------------------ */
+@layer utilities {
+  .mask-fade-top {
+    --fade-size: 200px; /* ajuste aqui a altura do fade */
+
+    /* branco (= opaco) após var(--fade-size) */
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      white var(--fade-size)
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      white var(--fade-size)
+    ); /* Safari / iOS */
+
+    /* luminance = usa o brilho do gradiente (branco=1, preto=0) */
+    mask-type: luminance;
+    -webkit-mask-type: luminance;
+  }
+}

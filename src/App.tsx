@@ -8,17 +8,10 @@ import About from "@/pages/About";
 import Projects from "@/pages/Projects";
 import Contact from "@/pages/Contact";
 
-/* ------------------------------------------------------------------ */
-/* tipos                                                               */
-/* ------------------------------------------------------------------ */
 type SectionKey = "home" | "about" | "projects" | "contact";
 type SectionRefs = { [K in SectionKey]: React.RefObject<HTMLElement | null> };
 
-/* ------------------------------------------------------------------ */
-/* componente principal                                                */
-/* ------------------------------------------------------------------ */
 export default function App() {
-  /* refs estáveis para cada <section> */
   const refs: SectionRefs = useMemo(
     () => ({
       home: createRef<HTMLElement>(),
@@ -31,7 +24,7 @@ export default function App() {
 
   const [current, setCurrent] = useState<SectionKey>("home");
 
-  /* detecta qual seção domina o viewport */
+  /* IntersectionObserver que marca a seção atual ------------------ */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -48,26 +41,36 @@ export default function App() {
       (r) => r.current && observer.observe(r.current)
     );
     return () => observer.disconnect();
-  }, [refs]); // refs é memoizado (estável)
+  }, [refs]);
 
-  /* scroll suave até a seção */
   const scrollTo = (key: SectionKey) =>
     refs[key].current?.scrollIntoView({ behavior: "smooth" });
 
-  /* --------------------------- layout --------------------------- */
+  /* ----------------------------- layout --------------------------- */
   return (
     <div className="flex min-h-screen flex-col">
       <Header current={current} onNav={scrollTo} />
 
       <main className="flex-1 pt-24">
-        {/* ---------- Home sem pontinhos ---------- */}
+        {/* ---------- Home (sem pontinhos) ---------- */}
         <section ref={refs.home} data-section="home" id="home">
           <Home />
         </section>
 
-        {/* ---------- Demais seções com fundo contínuo ---------- */}
-        <div className="bg-dots flex flex-col space-y-32 md:space-y-48">
-          <section ref={refs.about} data-section="about" id="about">
+        {/* ---------- Demais seções ---------- */}
+        <div
+          className="
+            bg-dots                    /* padrão pontilhado */
+            mask-fade-top              /* gradiente de opacidade no topo */
+            flex flex-col space-y-32 md:space-y-48
+          "
+        >
+          <section
+            ref={refs.about}
+            data-section="about"
+            id="about"
+            className="pt-32 md:pt-48"
+          >
             <About />
           </section>
 

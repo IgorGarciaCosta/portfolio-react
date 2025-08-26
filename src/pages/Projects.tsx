@@ -1,6 +1,7 @@
 /* --------------------- pages/Projects.tsx --------------------- */
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { ProjectCard } from "@/components/ProjectCard";
 
 /* ------------------- lista de projetos ------------------- */
@@ -8,37 +9,37 @@ const PROJECTS = [
   {
     title: "Realtime mesh Exporter",
     description:
-      "Unreal engine application of a new technology that still didnt exist on the market that allows users to export skinned meshes in runtime. Published on unreal marketplace.",
+      "Unreal Engine application that exports skinned meshes at runtime (Marketplace).",
     videoSrc: "https://www.youtube.com/embed/rJmea9DGjjo",
   },
   {
     title: "OpenAI UE5 integration Plugin",
     description:
-      "UE pluhin of integration between the editor and OepnAI services, allowing users to generate text, images and code using AI.",
+      "Plugin that connects the Unreal editor with OpenAI services for text, image and code generation.",
     videoSrc: "https://www.youtube.com/embed/SM36E1veQto",
   },
   {
     title: "VR bedroom simulation",
     description:
-      "Simulation of a bedroom in VR using Unreal Engine, with interactive objects and realistic lighting.",
+      "Bedroom simulation in VR with interactive objects and realistic lighting.",
     videoSrc: "https://www.youtube.com/embed/VUssMq4qAyk",
   },
   {
     title: "Platform 2D game",
     description:
-      "Project featuring a 2D platform game with character movement, animations, enemies, collectibles, and differnet level mechanics.",
+      "2-day prototype: movement, enemies, collectibles and multiple mechanics.",
     videoSrc: "https://www.youtube.com/embed/HTJ7bF0yzVs",
   },
   {
     title: "Laser launcher robot",
     description:
-      "Multidisplinary project where I designed 3D modleed, texturized and built a robot capable of moving and shooting a laser at targets. With realistic lighting and destrcution effects",
+      "Robot that moves and fires a laser at targets, with lighting & destruction FX.",
     videoSrc: "https://www.youtube.com/embed/Qf3frW3jAWk",
   },
   {
     title: "Skateboarding prototype",
     description:
-      "Implemented core skating mechanics, responsive UI for gamepad / keyboard as a 2 days challenge.",
+      "Implemented core skating mechanics and responsive UI for gamepad / keyboard.",
     videoSrc: "https://www.youtube.com/embed/CL3kiYauUl0",
   },
 ];
@@ -46,11 +47,11 @@ const PROJECTS = [
 const wrap = (i: number, len: number) => (i + len) % len;
 
 export default function Projects() {
-  const [index, setIndex] = useState(0); // ativo
+  const [index, setIndex] = useState(0); // cartão central
   const [direction, setDirection] = useState(0); // -1 ⟵ | +1 ⟶
   const len = PROJECTS.length;
 
-  /* animação */
+  /* animação do cartão ativo */
   const variants = {
     enter: (dir: number) => ({
       x: dir > 0 ? 300 : -300,
@@ -77,21 +78,29 @@ export default function Projects() {
   const nextIdx = wrap(index + 1, len);
 
   return (
-    <section id="projects" className="mx-auto max-w-6xl space-y-10">
-      <h2 className="mb-8 text-3xl font-bold">Highlight Projects</h2>
+    <section id="projects" className="mx-auto max-w-6xl space-y-10 px-4">
+      {/* ----------- título ----------- */}
+      <h2 className="mb-8 pl-4 text-center text-3xl font-bold sm:pl-0 sm:text-left sm:text-4xl">
+        Highlight Projects
+      </h2>
 
-      {/* -------------------- CARROSSEL -------------------- */}
+      {/* --------------- carrossel --------------- */}
       <div className="relative flex items-center justify-center overflow-hidden">
-        {/* lado esquerdo */}
+        {/* ---------- lado esquerdo ---------- */}
         <div
-          className="absolute inset-y-0 left-0 z-10 flex items-center pl-4
-                     w-40 sm:w-56 lg:w-64 cursor-pointer select-none"
+          className="relative inset-y-0 left-0 z-10 flex w-28 items-center sm:w-56 lg:w-64
+                     cursor-pointer select-none"
           onClick={prev}
         >
+          {/* seta (mobile only) */}
+          <FaChevronLeft
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl
+                       text-blue-600 sm:hidden pointer-events-none"
+          />
           <ProjectCard {...PROJECTS[prevIdx]} shrink />
         </div>
 
-        {/* cartão ativo */}
+        {/* ---------- cartão ativo ---------- */}
         <AnimatePresence custom={direction} mode="wait">
           <motion.div
             key={index}
@@ -101,18 +110,23 @@ export default function Projects() {
             animate="center"
             exit="exit"
             transition={{ type: "spring", stiffness: 120, damping: 20 }}
-            className="relative z-20 w-full sm:w-[70%] lg:w-[60%]"
+            className="relative z-20 w-[85%] sm:w-[70%] lg:w-[60%]"
           >
             <ProjectCard {...PROJECTS[index]} active />
           </motion.div>
         </AnimatePresence>
 
-        {/* lado direito */}
+        {/* ---------- lado direito ---------- */}
         <div
-          className="absolute inset-y-0 right-0 z-10 flex items-center pr-4
-                     w-40 sm:w-56 lg:w-64 cursor-pointer select-none"
+          className="relative inset-y-0 right-0 z-10 flex w-28 items-center justify-end
+                     sm:w-56 lg:w-64 cursor-pointer select-none"
           onClick={next}
         >
+          {/* seta (mobile only) */}
+          <FaChevronRight
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl
+                       text-blue-600 sm:hidden pointer-events-none"
+          />
           <ProjectCard {...PROJECTS[nextIdx]} shrink />
         </div>
       </div>

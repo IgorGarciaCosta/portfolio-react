@@ -1,5 +1,5 @@
 /* -------------- Home.tsx (hover “wipe” no botão de CV) -------------- */
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import ParticleBackground from "@/components/ParticleBackground";
 import TypewriterText from "@/components/TypewriterText";
 
@@ -26,19 +26,17 @@ export default function Home() {
 
         <div className="flex flex-wrap justify-center gap-4">
           {/* ---------------- botão Projects (inalterado) ---------------- */}
-          <Link
-            to="/projects"
-            className="
-              inline-block rounded bg-blue-600 px-6 py-3 font-medium text-white
-              transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400
-            "
+          <a
+            href="#projects"
+            className="inline-block rounded bg-blue-600 px-6 py-3 font-medium text-white
+             transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
           >
             See Projects
-          </Link>
+          </a>
 
           {/* ---------------- botão Download CV com animação “wipe” ---------------- */}
           <a
-            href="/SoftwareEngineerCV.pdf"
+            href="/IgorGarciaCV.pdf"
             download
             /* group = possibilita usar group-hover nos pseudo-elementos */
             className="

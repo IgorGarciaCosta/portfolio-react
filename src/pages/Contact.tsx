@@ -54,7 +54,8 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setSent(true);
+    /* 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -68,7 +69,7 @@ export default function Contact() {
       setForm({ name: "", email: "", message: "" });
     } catch {
       alert("Sorry, failed to send. Try again later.");
-    }
+    } */
   };
 
   /* ------- parâmetros da animação ------- */

@@ -9,37 +9,49 @@ const PROJECTS = [
   {
     title: "Realtime mesh Exporter",
     description:
-      "Unreal Engine application that exports skinned meshes at runtime (Marketplace).",
+      "Unreal Engine application that exports skinned meshes at runtime feature, still inexistent in market. Available on FAB official marketplace: https://www.fab.com/listings/7f713413-e4d3-4ac8-9c53-975fb70b1170.",
     videoSrc: "https://www.youtube.com/embed/rJmea9DGjjo",
   },
   {
     title: "OpenAI UE5 integration Plugin",
     description:
-      "Plugin that connects the Unreal editor with OpenAI services for text, image and code generation.",
+      "Plugin that integrates the Unreal editor with OpenAI services for text, image and code generation and creates an all in one environment.",
     videoSrc: "https://www.youtube.com/embed/SM36E1veQto",
+  },
+  {
+    title: "Keyboard Heatmap",
+    description:
+      "C++ UE plugin that monitorizes every user keyboard input during game execution and generates heatmap graphics and .xml lists with the extracted data.",
+    videoSrc: "https://www.youtube.com/embed/eeszm5rO-bI",
+  },
+  {
+    title: "Unused plugins handler",
+    description:
+      "UE full C++ plugin that born from a user necessity of my team to manage and disable unnecessary plugins in a project automatically",
+    videoSrc: "https://www.youtube.com/embed/KsBKdIevOns",
   },
   {
     title: "VR bedroom simulation",
     description:
-      "Bedroom simulation in VR with interactive objects and realistic lighting.",
+      "Bedroom simulation in VR with interactive objects and realistic lighting implemented in UE5.5 using a Vive XR Elite.",
     videoSrc: "https://www.youtube.com/embed/VUssMq4qAyk",
   },
   {
     title: "Platform 2D game",
     description:
-      "2-day prototype: movement, enemies, collectibles and multiple mechanics.",
+      "Weekend prototype of a 2D game implemented in UE using BPs, paper 2D and FLipbooks, featuring some core mechanics, like: movement, jumping, enemies, collectibles and points/life system.",
     videoSrc: "https://www.youtube.com/embed/HTJ7bF0yzVs",
   },
   {
     title: "Laser launcher robot",
     description:
-      "Robot that moves and fires a laser at targets, with lighting & destruction FX.",
+      "Robot that moves and fires a laser at targets, with lighting & destruction FX. Implemented in UE5 using technologies as Niagara, Lumen and Nanite. Made the whole process from scratch: modeling, texturing, rigging, animating and programming.",
     videoSrc: "https://www.youtube.com/embed/Qf3frW3jAWk",
   },
   {
     title: "Skateboarding prototype",
     description:
-      "Implemented core skating mechanics and responsive UI for gamepad / keyboard.",
+      "Skateboarding game with core mechanichs like move, sprint, jump and count points with responsive UI for gamepad / keyboard implemented as a 2 day challenge",
     videoSrc: "https://www.youtube.com/embed/CL3kiYauUl0",
   },
 ];

@@ -128,24 +128,32 @@ export default function About() {
   const summary = (
     <div className="space-y-4 text-justify leading-7">
       <p>
-        I’m <strong>Igor Garcia</strong>, a Computer Engineer with 4+ years of
-        professional experience building interactive software and VR solutions.
-        My core stack is <strong>C++ / Unreal Engine</strong>, where I architect
-        systems, implement game mechanics and optimise performance for real-time
-        applications.
+        I’m <strong>Igor Garcia</strong>, a Computer Engineer with 4 + years
+        crafting real-time experiences in <strong>C++ / Unreal Engine</strong>.
+        I’ve been broadening my reach into modern web development—both front-
+        and back-end— applying tools like{" "}
+        <strong>JavaScript, React, Tailwind CSS&nbsp;</strong>,
+        <strong>Python</strong> applying the most suited tool for each project.
       </p>
+
       <p>
-        At <strong>Ford Motor Company</strong> I develop virtual prototypes that
-        reduce physical mock-up costs, speed up design decisions and provide
-        realistic visualisation of upcoming vehicles. I’ve also delivered
-        multiplayer gameplay and responsive UI for
-        <em className="italic"> SkateNation XL</em> during my tenure at
-        <strong> Blue Gravity Studios</strong>.
+        At <strong>Ford Motor Company</strong> I build virtual prototypes that
+        cut physical mock-up costs and speed design decisions. Previously, at
+        <strong> Blue Gravity Studios</strong>, I delivered multiplayer gameplay
+        and responsive UI for <em className="italic">SkateNation&nbsp;XL</em>.
       </p>
+
       <p>
-        Beyond coding I enjoy <strong>3D modelling</strong> with Blender,
-        ZBrush, Maya and CATIA, consistently blending art and engineering to
-        craft compelling user experiences.
+        I use AI assistants—primarily <strong>GitHub Copilot</strong>,{" "}
+        <strong>GPT</strong>, <strong>DeepSeek</strong> etc —as a productivity
+        booster for the hard work, letting me focus on architecture and problem
+        solving.
+      </p>
+
+      <p>
+        Beyond coding, I explore <strong>3D modelling</strong> with Blender,
+        ZBrush, Maya and CATIA, mixing art and engineering to create engaging
+        experiences.
       </p>
     </div>
   );

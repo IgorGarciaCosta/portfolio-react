@@ -12,4 +12,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),  // agora você pode importar usando "@/..."
     },
   },
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8787', // Proxy para o backend local
+    },
+  },  
 });

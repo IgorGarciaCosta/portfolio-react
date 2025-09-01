@@ -1,4 +1,4 @@
-/* -------------- Contact.tsx (card com cores suaves) -------------- */
+/* ------------------- pages/Contact.tsx ------------------- */
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
@@ -47,6 +47,7 @@ export default function Contact() {
     message: "",
   });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -54,8 +55,8 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    /* 
+    setLoading(true);
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -65,21 +66,22 @@ export default function Contact() {
 
       if (!res.ok) throw new Error("Failed");
 
-      setSent(true); // mostra mensagem verde
+      setSent(true);
       setForm({ name: "", email: "", message: "" });
     } catch {
       alert("Sorry, failed to send. Try again later.");
-    } */
+    } finally {
+      setLoading(false);
+    }
   };
 
   /* ------- parâmetros da animação ------- */
-  const bounce = { y: [0, -36, 0] }; // salto (≈ 16 px)
-  const bounceDuration = 0.5; // duração do salto
-  const stagger = 0.3; // intervalo entre ícones
-  const totalCycle = 3; // todo o ciclo dura 3 s
+  const bounce = { y: [0, -36, 0] };
+  const bounceDuration = 0.5;
+  const stagger = 0.3;
+  const totalCycle = 3;
   const commonRepeatDelay =
     totalCycle - bounceDuration - (CONTACT_LINKS.length - 1) * stagger;
-  // 3 - 0.5 - 0.6 = 1.9 s de pausa em todos
 
   return (
     <motion.section
@@ -92,9 +94,9 @@ export default function Contact() {
         {/* -------- coluna esquerda -------- */}
         <div className="mb-12 flex flex-col items-center gap-8 text-center md:mb-0 md:items-start md:text-left">
           <header className="space-y-4">
-            <h1 className="text-3xl font-extrabold">Let&apos;s Connect!</h1>
+            <h1 className="text-3xl font-extrabold">Let's Connect!</h1>
             <p className="max-w-xs text-gray-600 dark:text-gray-300">
-              I&apos;m always open to discussing new opportunities, interesting
+              I'm always open to discussing new opportunities, interesting
               projects, or just having a chat about technology and development.
             </p>
           </header>
@@ -116,7 +118,7 @@ export default function Contact() {
                   animate={bounce}
                   transition={{
                     duration: bounceDuration,
-                    delay: idx * stagger, // 0 s, 0.3 s, 0.6 s …
+                    delay: idx * stagger,
                     repeat: Infinity,
                     repeatDelay: commonRepeatDelay,
                     ease: "easeInOut",
@@ -183,9 +185,13 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full rounded bg-blue-600 px-6 py-2 font-medium text-white hover:bg-blue-700"
+                  disabled={loading}
+                  className={`
+                    w-full rounded px-6 py-2 font-medium text-white
+                    ${loading ? "bg-blue-400" : "bg-blue-600 hover:bg-blue-700"}
+                  `}
                 >
-                  Submit
+                  {loading ? "Sending..." : "Submit"}
                 </button>
               </form>
             )}

@@ -36,7 +36,7 @@ export default function Home() {
 
           {/* ---------------- botão Download CV com animação “wipe” ---------------- */}
           <a
-            href="/IgorGarciaCV.pdf"
+            href="/SoftwareEngineerCV.pdf"
             download
             /* group = possibilita usar group-hover nos pseudo-elementos */
             className="

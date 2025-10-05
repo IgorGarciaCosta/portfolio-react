@@ -33,7 +33,7 @@ const PROJECTS = [
   {
     title: "Unused plugins handler",
     description:
-      "UE full C++ plugin that born from a user necessity of my team to manage and disable unnecessary plugins in a project automatically",
+      "UE full C++ plugin that born from a user necessity of my team to manage and disable unnecessary plugins in a project automatically.",
     videoSrc: "https://www.youtube.com/embed/KsBKdIevOns",
   },
   {

@@ -13,6 +13,12 @@ const PROJECTS = [
     videoSrc: "https://www.youtube.com/embed/rJmea9DGjjo",
   },
   {
+    title: "Cripto Checker",
+    description:
+      "A React-based web application for setting personalized cryptocurrency price alerts and receiving them via email.",
+    videoSrc: "https://www.youtube.com/embed/Tb5DNL9x4HQ",
+  },
+  {
     title: "OpenAI UE5 integration Plugin",
     description:
       "Plugin that integrates the Unreal editor with OpenAI services for text, image and code generation and creates an all in one environment.",

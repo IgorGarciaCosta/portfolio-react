@@ -7,16 +7,22 @@ import { ProjectCard } from "@/components/ProjectCard";
 /* ------------------- lista de projetos ------------------- */
 const PROJECTS = [
   {
+    title: "Laser launcher robot",
+    description:
+      "Robot that moves and fires a laser at targets, with lighting & destruction FX. Implemented in UE5 using technologies as Niagara, Lumen and Nanite. Made the whole process from scratch: modeling, texturing, rigging, animating and programming.",
+    videoSrc: "https://www.youtube.com/embed/Qf3frW3jAWk",
+  },
+  {
+    title: "Skateboarding prototype",
+    description:
+      "Skateboarding game with core mechanichs like move, sprint, jump and count points with responsive UI for gamepad / keyboard implemented as a 2 day challenge",
+    videoSrc: "https://www.youtube.com/embed/CL3kiYauUl0",
+  },
+  {
     title: "Realtime mesh Exporter",
     description:
       "Unreal Engine application that exports skinned meshes at runtime feature, still inexistent in market. Available on FAB official marketplace: https://www.fab.com/listings/7f713413-e4d3-4ac8-9c53-975fb70b1170.",
     videoSrc: "https://www.youtube.com/embed/rJmea9DGjjo",
-  },
-  {
-    title: "Cripto Checker",
-    description:
-      "A React-based web application for setting personalized cryptocurrency price alerts and receiving them via email.",
-    videoSrc: "https://www.youtube.com/embed/Tb5DNL9x4HQ",
   },
   {
     title: "OpenAI UE5 integration Plugin",
@@ -24,6 +30,7 @@ const PROJECTS = [
       "Plugin that integrates the Unreal editor with OpenAI services for text, image and code generation and creates an all in one environment.",
     videoSrc: "https://www.youtube.com/embed/SM36E1veQto",
   },
+
   {
     title: "Keyboard Heatmap",
     description:
@@ -49,16 +56,16 @@ const PROJECTS = [
     videoSrc: "https://www.youtube.com/embed/HTJ7bF0yzVs",
   },
   {
-    title: "Laser launcher robot",
+    title: "Cripto Checker",
     description:
-      "Robot that moves and fires a laser at targets, with lighting & destruction FX. Implemented in UE5 using technologies as Niagara, Lumen and Nanite. Made the whole process from scratch: modeling, texturing, rigging, animating and programming.",
-    videoSrc: "https://www.youtube.com/embed/Qf3frW3jAWk",
+      "A React-based web application for setting personalized cryptocurrency price alerts and receiving them via email.",
+    videoSrc: "https://www.youtube.com/embed/Tb5DNL9x4HQ",
   },
   {
-    title: "Skateboarding prototype",
+    title: "Smart Mesh Cleaner Pro",
     description:
-      "Skateboarding game with core mechanichs like move, sprint, jump and count points with responsive UI for gamepad / keyboard implemented as a 2 day challenge",
-    videoSrc: "https://www.youtube.com/embed/CL3kiYauUl0",
+      "Blender professional cleanup tool with Smart Trash Bin & Restore.",
+    videoSrc: "https://www.youtube.com/embed/c0-_-ubsPd8",
   },
 ];
 

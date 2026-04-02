@@ -130,10 +130,11 @@ export default function About() {
       <p>
         I’m <strong>Igor Garcia</strong>, a Computer Engineer with 4 + years
         crafting real-time experiences in <strong>C++ / Unreal Engine</strong>.
-        I’ve been broadening my reach into modern web development—both front-
-        and back-end— applying tools like{" "}
-        <strong>JavaScript, React, Tailwind CSS&nbsp;</strong>,
-        <strong>Python</strong> applying the most suited tool for each project.
+        My work also spans web engineering, with a strong focus on backend
+        development using <strong>C#</strong>, <strong>ASP.NET</strong>, and
+        <strong> Python</strong>, plus frontend delivery with
+        <strong> JavaScript</strong>, <strong>React</strong>, and
+        <strong> Tailwind CSS</strong> where needed.
       </p>
 
       <p>
@@ -141,13 +142,15 @@ export default function About() {
         cut physical mock-up costs and speed design decisions. Previously, at
         <strong> Blue Gravity Studios</strong>, I delivered multiplayer gameplay
         and responsive UI for <em className="italic">SkateNation&nbsp;XL</em>.
+        More recently, I’ve also been expanding into backend engineering with
+        <strong> C# / ASP.NET</strong>, designing APIs and production-minded
+        services.
       </p>
 
       <p>
-        I use AI assistants—primarily <strong>GitHub Copilot</strong>,{" "}
-        <strong>GPT</strong>, <strong>DeepSeek</strong> etc —as a productivity
-        booster for the hard work, letting me focus on architecture and problem
-        solving.
+        I use AI assistants as a productivity aid, mainly{" "}
+        <strong>Claude Opus 4.6</strong> and <strong>Codex</strong>, so I can
+        stay focused on architecture and problem solving.
       </p>
 
       <p>

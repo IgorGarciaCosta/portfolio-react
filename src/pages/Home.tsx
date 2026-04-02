@@ -20,8 +20,8 @@ export default function Home() {
         />
 
         <p className="text-lg text-slate-700 dark:text-slate-300">
-          C++ engineer specialised in Games &amp; VR, now crafting
-          high-performance web experiences.
+          Software engineer with 4+ years building high-performance VR/XR,
+          multiplayer, and backend systems across Unreal, Unity, and .NET.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">

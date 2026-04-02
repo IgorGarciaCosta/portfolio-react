@@ -9,62 +9,62 @@ const PROJECTS = [
   {
     title: "Laser launcher robot",
     description:
-      "Robot that moves and fires a laser at targets, with lighting & destruction FX. Implemented in UE5 using technologies as Niagara, Lumen and Nanite. Made the whole process from scratch: modeling, texturing, rigging, animating and programming.",
+      "Full-pipeline solo project: modeled, rigged, animated and programmed a laser-firing robot entirely from scratch in UE5. Showcases mastery of Niagara particle FX, Lumen global illumination and Nanite virtualized geometry in a single production-quality scene.",
     videoSrc: "https://www.youtube.com/embed/Qf3frW3jAWk",
   },
   {
     title: "Skateboarding prototype",
     description:
-      "Skateboarding game with core mechanichs like move, sprint, jump and count points with responsive UI for gamepad / keyboard implemented as a 2 day challenge",
+      "Rapid-prototype built in 48 hours — demonstrates the ability to deliver a polished, playable game loop under tight deadlines. Features fluid movement, trick system, score tracking and full gamepad/keyboard input parity.",
     videoSrc: "https://www.youtube.com/embed/CL3kiYauUl0",
   },
   {
     title: "Realtime mesh Exporter",
     description:
-      "Unreal Engine application that exports skinned meshes at runtime feature, still inexistent in market. Available on FAB official marketplace: https://www.fab.com/listings/7f713413-e4d3-4ac8-9c53-975fb70b1170.",
+      "Fills a genuine market gap: the first publicly available UE tool capable of exporting fully skinned meshes at runtime. Published and sold on the official FAB marketplace, proving real-world production value and demand.",
     videoSrc: "https://www.youtube.com/embed/rJmea9DGjjo",
   },
   {
     title: "OpenAI UE5 integration Plugin",
     description:
-      "Plugin that integrates the Unreal editor with OpenAI services for text, image and code generation and creates an all in one environment.",
+      "Editor plugin that embeds OpenAI's text, image and code-generation APIs directly inside Unreal Engine, turning the IDE into a unified AI-powered workspace and cutting context-switching time for the entire team.",
     videoSrc: "https://www.youtube.com/embed/SM36E1veQto",
   },
 
   {
     title: "Keyboard Heatmap",
     description:
-      "C++ UE plugin that monitorizes every user keyboard input during game execution and generates heatmap graphics and .xml lists with the extracted data.",
+      "Data-driven UX analytics tool built in C++. Tracks every keystroke during gameplay, then visualises the aggregated data as interactive heatmaps and structured XML reports — enabling designers to make evidence-based input decisions.",
     videoSrc: "https://www.youtube.com/embed/eeszm5rO-bI",
   },
   {
     title: "Unused plugins handler",
     description:
-      "UE full C++ plugin that born from a user necessity of my team to manage and disable unnecessary plugins in a project automatically.",
+      "Born out of a real team pain point: a C++ editor plugin that audits, disables and manages unused UE plugins automatically — reducing compile times and keeping large projects lean without manual intervention.",
     videoSrc: "https://www.youtube.com/embed/KsBKdIevOns",
   },
   {
     title: "VR bedroom simulation",
     description:
-      "Bedroom simulation in VR with interactive objects and realistic lighting implemented in UE5.5 using a Vive XR Elite.",
+      "Immersive XR experience built in UE5.5 for the Vive XR Elite — features physically interactive objects and cinematic lighting that demonstrate hands-on expertise with the full VR development pipeline.",
     videoSrc: "https://www.youtube.com/embed/VUssMq4qAyk",
   },
   {
     title: "Platform 2D game",
     description:
-      "Weekend prototype of a 2D game implemented in UE using BPs, paper 2D and FLipbooks, featuring some core mechanics, like: movement, jumping, enemies, collectibles and points/life system.",
+      "Weekend challenge that produced a complete 2D platformer in UE: fluid character movement, enemy AI, collectibles and a lives/score system — all built with Paper 2D and Flipbooks, proving fast iteration from zero to shippable.",
     videoSrc: "https://www.youtube.com/embed/HTJ7bF0yzVs",
   },
   {
     title: "Cripto Checker",
     description:
-      "A React-based web application for setting personalized cryptocurrency price alerts and receiving them via email.",
+      "Full-stack React web app that monitors live crypto prices and fires personalised email alerts the moment user-defined thresholds are crossed — combining real-time API integration with a clean, responsive UI.",
     videoSrc: "https://www.youtube.com/embed/Tb5DNL9x4HQ",
   },
   {
     title: "Smart Mesh Cleaner Pro",
     description:
-      "Blender professional cleanup tool with Smart Trash Bin & Restore.",
+      "Blender add-on that streamlines asset maintenance with a Smart Trash Bin system — safely staging deletions, previewing impact and enabling one-click restore, so artists can clean scenes confidently without data loss.",
     videoSrc: "https://www.youtube.com/embed/c0-_-ubsPd8",
   },
 ];

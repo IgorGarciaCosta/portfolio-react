@@ -7,6 +7,12 @@ import { ProjectCard } from "@/components/ProjectCard";
 /* ------------------- lista de projetos ------------------- */
 const PROJECTS = [
   {
+    title: "SkateNationXL",
+    description:
+      "Multiplayer skateboarding game where I worked as a C++ Software Engineer — contributing to core gameplay systems, network replication and online session management to deliver a smooth, responsive multiplayer experience.",
+    videoSrc: "https://www.youtube.com/embed/_C7ui4kHskI",
+  },
+  {
     title: "Laser launcher robot",
     description:
       "Full-pipeline solo project: modeled, rigged, animated and programmed a laser-firing robot entirely from scratch in UE5. Showcases mastery of Niagara particle FX, Lumen global illumination and Nanite virtualized geometry in a single production-quality scene.",

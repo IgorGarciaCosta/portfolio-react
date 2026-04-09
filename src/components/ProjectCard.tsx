@@ -1,6 +1,7 @@
 /* ----------------- components/ProjectCard.tsx ----------------- */
+import { useState } from "react";
 import { ResponsiveIframe } from "@/components/ResponsiveIframe";
-import clsx from "clsx";
+import { FaPlay } from "react-icons/fa";
 
 /* gera URL de thumbnail do YouTube (sempre existe a hqdefault) */
 function ytThumb(embed: string) {
@@ -8,48 +9,59 @@ function ytThumb(embed: string) {
   return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
 }
 
+type Tag = "Unreal / C++" | "Web" | "Tools" | "VR";
+
 type Props = {
   title: string;
   description: string;
   videoSrc: string;
-  shrink?: boolean; // => cartão lateral
-  active?: boolean; // => cartão central
-  [key: string]: unknown;
+  tags: Tag[];
 };
 
-export function ProjectCard({
-  title,
-  description,
-  videoSrc,
-  shrink,
-  active,
-  ...rest
-}: Props) {
+export type { Tag };
+
+export function ProjectCard({ title, description, videoSrc, tags }: Props) {
+  const [playing, setPlaying] = useState(false);
+
   return (
     <article
-      {...rest}
-      className={clsx(
-        "flex flex-col overflow-hidden rounded-xl shadow-md transition-all duration-300",
-        "bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-gray-100",
-        shrink
-          ? "scale-90 opacity-40 brightness-75 hover:opacity-60"
-          : "scale-100 opacity-100"
-      )}
+      className="flex flex-col overflow-hidden rounded-xl shadow-md transition-all duration-300
+                 bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-gray-100"
     >
-      {/* vídeo (só se for o cartão ativo)  */}
-      {active ? (
+      {/* video facade: thumbnail + play button → iframe on click */}
+      {playing ? (
         <ResponsiveIframe src={videoSrc} title={title} />
       ) : (
-        <img
-          src={ytThumb(videoSrc)}
-          alt={`${title} thumbnail`}
-          className="aspect-video w-full object-cover pointer-events-none"
-          /* se, por acaso, a imagem falhar -> cor sólida */
-          onError={(e) => {
-            (e.currentTarget as HTMLImageElement).style.background =
-              "rgba(0,0,0,0.4)";
-          }}
-        />
+        <button
+          type="button"
+          onClick={() => setPlaying(true)}
+          className="group relative aspect-video w-full cursor-pointer overflow-hidden"
+          aria-label={`Play ${title} video`}
+        >
+          <img
+            src={ytThumb(videoSrc)}
+            alt={`${title} thumbnail`}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).style.background =
+                "rgba(0,0,0,0.4)";
+            }}
+          />
+          {/* play overlay */}
+          <span
+            className="absolute inset-0 flex items-center justify-center
+                       bg-black/30 transition-colors group-hover:bg-black/40"
+          >
+            <span
+              className="flex h-14 w-14 items-center justify-center rounded-full
+                         bg-white/90 text-blue-600 shadow-lg
+                         transition-transform group-hover:scale-110"
+            >
+              <FaPlay className="ml-1 text-xl" />
+            </span>
+          </span>
+        </button>
       )}
 
       <div className="space-y-2 p-4">
@@ -57,6 +69,19 @@ export function ProjectCard({
         <p className="text-sm text-gray-700 dark:text-gray-300">
           {description}
         </p>
+
+        {/* tag pills */}
+        <div className="flex flex-wrap gap-1.5 pt-1">
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium
+                         text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </article>
   );

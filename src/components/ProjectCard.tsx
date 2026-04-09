@@ -76,7 +76,7 @@ export function ProjectCard({ title, description, videoSrc, tags }: Props) {
             <span
               key={tag}
               className="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium
-                         text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                         text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 "
             >
               {tag}
             </span>

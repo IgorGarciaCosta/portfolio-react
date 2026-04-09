@@ -1,5 +1,4 @@
 /* -------------- Home.tsx (hover "wipe" nos botões de CV) -------------- */
-//import { Link } from "react-router-dom";
 import ParticleBackground from "@/components/ParticleBackground";
 import TypewriterText from "@/components/TypewriterText";
 

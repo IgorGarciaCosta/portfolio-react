@@ -107,7 +107,6 @@ const backend: Skill[] = [
   { icon: <SiCplusplus />, label: "C++" },
   { icon: <SiPython />, label: "Python" },
   { icon: <SiNodedotjs />, label: "Node.js" },
-  { icon: <SiGit />, label: "Git" },
 ];
 
 const tools: Skill[] = [

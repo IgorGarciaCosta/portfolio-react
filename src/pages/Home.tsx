@@ -19,8 +19,9 @@ export default function Home() {
         />
 
         <p className="text-lg text-slate-700 dark:text-slate-300">
-          Software engineer with 4+ years building high-performance VR/XR,
-          multiplayer, and backend systems across Unreal, Unity, and .NET.
+          Software engineer with 4+ years building full-stack applications,
+          real-time 3D experiences, and scalable backend systems — C++, Python,
+          ASP.NET and React.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">

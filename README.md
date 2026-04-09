@@ -1,6 +1,6 @@
 # Igor Garcia — Developer Portfolio
 
-Personal portfolio built with React, TypeScript, and Vite showcasing my work as a Software Engineer with experience in VR/XR, multiplayer systems, and backend development.
+Personal portfolio built with React, TypeScript, and Vite showcasing my work as a Software Engineer with experience in full-stack applications, real-time 3D experiences, and scalable backend systems.
 
 ## Features
 
@@ -57,10 +57,10 @@ For the contact form to work, set these on your Vercel dashboard:
 ```
 src/
 ├── components/     # Header, Footer, ThemeToggle, ParticleBackground, ProjectCard, etc.
-├── hooks/          # useTheme (dark/light/system)
+├── contexts/       # ThemeContext / ThemeProvider (shared dark/light/system state)
+├── hooks/          # useTheme (convenience wrapper around ThemeContext)
 ├── pages/          # Home, About, Projects, Contact
-├── assets/         # Images
-└── styles/         # Global CSS utilities
+└── assets/         # Images
 api/
 └── contact.js      # Vercel serverless function for email
 ```

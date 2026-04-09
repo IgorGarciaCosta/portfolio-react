@@ -1,5 +1,5 @@
 // src/components/ParticleBackground.tsx
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Particles from "@tsparticles/react";
 import { loadAll } from "@tsparticles/all";
 import {
@@ -7,18 +7,7 @@ import {
   type Engine,
   type ISourceOptions,
 } from "@tsparticles/engine";
-
-/* ---------- detecção inicial de tema ---------- */
-function getInitialIsDark(): boolean {
-  if (typeof document === "undefined") return false;
-  const root = document.documentElement;
-  if (root.classList.contains("dark")) return true;
-  if (root.classList.contains("light")) return false;
-  const stored = localStorage.getItem("theme");
-  if (stored === "dark") return true;
-  if (stored === "light") return false;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches;
-}
+import { useTheme } from "@/hooks/useTheme";
 
 export default function ParticleBackground() {
   /* 1. carrega plugins 1× */
@@ -31,18 +20,9 @@ export default function ParticleBackground() {
     }
   }, []);
 
-  /* 2. estado do tema */
-  const [isDark, setIsDark] = useState(getInitialIsDark);
-
-  /* 3. observa mudanças de classe <html> */
-  useEffect(() => {
-    const root = document.documentElement;
-    const update = () => setIsDark(root.classList.contains("dark"));
-    update();
-    const obs = new MutationObserver(update);
-    obs.observe(root, { attributes: true, attributeFilter: ["class"] });
-    return () => obs.disconnect();
-  }, []);
+  /* 2. tema via contexto */
+  const { applied } = useTheme();
+  const isDark = applied === "dark";
 
   /* 4. opções — SEM fullScreen  */
   const options = useMemo<ISourceOptions>(() => {

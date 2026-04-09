@@ -1,5 +1,5 @@
 /* --------------------------- src/App.tsx --------------------------- */
-import { useEffect, useMemo, useState, createRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -12,15 +12,17 @@ type SectionKey = "home" | "about" | "projects" | "contact";
 type SectionRefs = { [K in SectionKey]: React.RefObject<HTMLElement | null> };
 
 export default function App() {
-  const refs: SectionRefs = useMemo(
-    () => ({
-      home: createRef<HTMLElement>(),
-      about: createRef<HTMLElement>(),
-      projects: createRef<HTMLElement>(),
-      contact: createRef<HTMLElement>(),
-    }),
-    []
-  );
+  const homeRef = useRef<HTMLElement>(null);
+  const aboutRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
+
+  const refs: SectionRefs = {
+    home: homeRef,
+    about: aboutRef,
+    projects: projectsRef,
+    contact: contactRef,
+  };
 
   const [current, setCurrent] = useState<SectionKey>("home");
 
@@ -29,19 +31,20 @@ export default function App() {
     const observer = new IntersectionObserver(
       (entries) => {
         const best = entries.reduce((p, c) =>
-          p.intersectionRatio > c.intersectionRatio ? p : c
+          p.intersectionRatio > c.intersectionRatio ? p : c,
         );
         const key = best.target.getAttribute("data-section") as SectionKey;
         if (key) setCurrent(key);
       },
-      { rootMargin: "-40% 0% -40% 0%", threshold: [0, 0.4, 0.6, 1] }
+      { rootMargin: "-40% 0% -40% 0%", threshold: [0, 0.4, 0.6, 1] },
     );
 
     Object.values(refs).forEach(
-      (r) => r.current && observer.observe(r.current)
+      (r) => r.current && observer.observe(r.current),
     );
     return () => observer.disconnect();
-  }, [refs]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const scrollTo = (key: SectionKey) =>
     refs[key].current?.scrollIntoView({ behavior: "smooth" });

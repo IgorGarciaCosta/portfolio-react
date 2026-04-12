@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ProjectCard } from "@/components/ProjectCard";
-import type { Tag } from "@/components/ProjectCard";
+import type { Tag, ProjectLink } from "@/components/ProjectCard";
 
 /* ------------------- lista de projetos ------------------- */
 const PROJECTS: {
@@ -11,6 +11,7 @@ const PROJECTS: {
   videoSrc?: string;
   images?: string[];
   tags: Tag[];
+  links?: ProjectLink[];
 }[] = [
   {
     title: "SkateNationXL",
@@ -25,6 +26,13 @@ const PROJECTS: {
       "Full-pipeline solo project: modeled, rigged, animated and programmed a laser-firing robot entirely from scratch in UE5. Showcases mastery of Niagara particle FX, Lumen global illumination and Nanite virtualized geometry in a single production-quality scene.",
     videoSrc: "https://www.youtube.com/embed/Qf3frW3jAWk",
     tags: ["Unreal / C++"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/MechaDevelopment",
+        icon: "github",
+      },
+    ],
   },
   {
     title: "Skateboarding prototype",
@@ -32,6 +40,13 @@ const PROJECTS: {
       "Rapid-prototype built in 48 hours — demonstrates the ability to deliver a polished, playable game loop under tight deadlines. Features fluid movement, trick system, score tracking and full gamepad/keyboard input parity.",
     videoSrc: "https://www.youtube.com/embed/CL3kiYauUl0",
     tags: ["Unreal / C++"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/SkateboardingPrototype",
+        icon: "github",
+      },
+    ],
   },
   {
     title: "Realtime mesh Exporter",
@@ -46,6 +61,13 @@ const PROJECTS: {
       "Editor plugin that embeds OpenAI's text, image and code-generation APIs directly inside Unreal Engine, turning the IDE into a unified AI-powered workspace and cutting context-switching time for the entire team.",
     videoSrc: "https://www.youtube.com/embed/SM36E1veQto",
     tags: ["Unreal / C++", "Tools"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/OpenAIPlugin",
+        icon: "github",
+      },
+    ],
   },
   {
     title: "Keyboard Heatmap",
@@ -53,6 +75,13 @@ const PROJECTS: {
       "Data-driven UX analytics tool built in C++. Tracks every keystroke during gameplay, then visualises the aggregated data as interactive heatmaps and structured XML reports — enabling designers to make evidence-based input decisions.",
     videoSrc: "https://www.youtube.com/embed/eeszm5rO-bI",
     tags: ["Unreal / C++", "Tools"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/Unreal-Keyboard-Heatmap-Plugin",
+        icon: "github",
+      },
+    ],
   },
   {
     title: "Unused plugins handler",
@@ -60,6 +89,13 @@ const PROJECTS: {
       "Born out of a real team pain point: a C++ editor plugin that audits, disables and manages unused UE plugins automatically — reducing compile times and keeping large projects lean without manual intervention.",
     videoSrc: "https://www.youtube.com/embed/KsBKdIevOns",
     tags: ["Unreal / C++", "Tools"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/UnusedPluginsLister",
+        icon: "github",
+      },
+    ],
   },
   {
     title: "VR bedroom simulation",
@@ -67,6 +103,13 @@ const PROJECTS: {
       "Immersive XR experience built in UE5.5 for the Vive XR Elite — features physically interactive objects and cinematic lighting that demonstrate hands-on expertise with the full VR development pipeline.",
     videoSrc: "https://www.youtube.com/embed/VUssMq4qAyk",
     tags: ["VR", "Unreal / C++"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/VRRoom",
+        icon: "github",
+      },
+    ],
   },
   {
     title: "Platform 2D game",
@@ -74,6 +117,13 @@ const PROJECTS: {
       "Weekend challenge that produced a complete 2D platformer in UE: fluid character movement, enemy AI, collectibles and a lives/score system — all built with Paper 2D and Flipbooks, proving fast iteration from zero to shippable.",
     videoSrc: "https://www.youtube.com/embed/HTJ7bF0yzVs",
     tags: ["Unreal / C++"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/Unreal_CPP_Platfprmer",
+        icon: "github",
+      },
+    ],
   },
   {
     title: "Cripto Checker",
@@ -81,6 +131,18 @@ const PROJECTS: {
       "Full-stack React web app that monitors live crypto prices and fires personalised email alerts the moment user-defined thresholds are crossed — combining real-time API integration with a clean, responsive UI.",
     videoSrc: "https://www.youtube.com/embed/Tb5DNL9x4HQ",
     tags: ["Web", "Backend"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/crypto-alerts",
+        icon: "github",
+      },
+      {
+        label: "Live Demo",
+        url: "https://crypto-alerts-flfcjagba-igorgarciacostas-projects.vercel.app/",
+        icon: "external",
+      },
+    ],
   },
   {
     title: "PSN Price Tracker",
@@ -94,6 +156,18 @@ const PROJECTS: {
       "https://raw.githubusercontent.com/IgorGarciaCosta/PSN-Price-Tracker/main/docs/swagger-response.png",
     ],
     tags: ["Web", "Backend"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/PSN-Price-Tracker",
+        icon: "github",
+      },
+      {
+        label: "Telegram Bot",
+        url: "https://t.me/PsnNotificationsSender_bot",
+        icon: "telegram",
+      },
+    ],
   },
   {
     title: "Smart Mesh Cleaner Pro",
@@ -101,6 +175,13 @@ const PROJECTS: {
       "Blender add-on that streamlines asset maintenance with a Smart Trash Bin system — safely staging deletions, previewing impact and enabling one-click restore, so artists can clean scenes confidently without data loss.",
     videoSrc: "https://www.youtube.com/embed/c0-_-ubsPd8",
     tags: ["Tools"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/blender-smart-mesh-cleaner",
+        icon: "github",
+      },
+    ],
   },
 ];
 

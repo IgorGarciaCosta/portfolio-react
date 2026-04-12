@@ -2,7 +2,12 @@
 import { useState } from "react";
 import { ResponsiveIframe } from "@/components/ResponsiveIframe";
 import { ImageCarousel } from "@/components/ImageCarousel";
-import { FaPlay } from "react-icons/fa";
+import {
+  FaPlay,
+  FaGithub,
+  FaExternalLinkAlt,
+  FaTelegram,
+} from "react-icons/fa";
 
 /* gera URL de thumbnail do YouTube (sempre existe a hqdefault) */
 function ytThumb(embed: string) {
@@ -12,15 +17,28 @@ function ytThumb(embed: string) {
 
 type Tag = "Unreal / C++" | "Web" | "Backend" | "Tools" | "VR";
 
+type ProjectLink = {
+  label: string;
+  url: string;
+  icon: "github" | "telegram" | "external";
+};
+
 type Props = {
   title: string;
   description: string;
   videoSrc?: string;
   images?: string[];
   tags: Tag[];
+  links?: ProjectLink[];
 };
 
-export type { Tag };
+export type { Tag, ProjectLink };
+
+const LINK_ICON = {
+  github: FaGithub,
+  telegram: FaTelegram,
+  external: FaExternalLinkAlt,
+} as const;
 
 export function ProjectCard({
   title,
@@ -28,6 +46,7 @@ export function ProjectCard({
   videoSrc,
   images,
   tags,
+  links,
 }: Props) {
   const [playing, setPlaying] = useState(false);
 
@@ -94,6 +113,29 @@ export function ProjectCard({
             </span>
           ))}
         </div>
+
+        {/* project links */}
+        {links && links.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {links.map((link) => {
+              const Icon = LINK_ICON[link.icon];
+              return (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-md bg-gray-200 px-2.5 py-1 text-xs font-medium
+                             text-gray-800 transition-colors hover:bg-gray-300
+                             dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+                >
+                  <Icon className="text-sm" />
+                  {link.label}
+                </a>
+              );
+            })}
+          </div>
+        )}
       </div>
     </article>
   );

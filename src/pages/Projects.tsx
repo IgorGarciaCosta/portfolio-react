@@ -8,7 +8,8 @@ import type { Tag } from "@/components/ProjectCard";
 const PROJECTS: {
   title: string;
   description: string;
-  videoSrc: string;
+  videoSrc?: string;
+  images?: string[];
   tags: Tag[];
 }[] = [
   {
@@ -79,7 +80,20 @@ const PROJECTS: {
     description:
       "Full-stack React web app that monitors live crypto prices and fires personalised email alerts the moment user-defined thresholds are crossed — combining real-time API integration with a clean, responsive UI.",
     videoSrc: "https://www.youtube.com/embed/Tb5DNL9x4HQ",
-    tags: ["Web"],
+    tags: ["Web", "Backend"],
+  },
+  {
+    title: "PSN Price Tracker",
+    description:
+      "Full-stack price monitoring app built with ASP.NET Core (.NET 9) and an interactive Telegram bot. Tracks PlayStation Store prices in real time via web scraping and sends alerts when games hit your target — featuring automatic background monitoring, a REST API with key auth and rate limiting, Swagger docs, SQLite persistence, and Docker deployment.",
+    images: [
+      "https://raw.githubusercontent.com/IgorGarciaCosta/PSN-Price-Tracker/main/docs/swagger-overview.png",
+      "https://raw.githubusercontent.com/IgorGarciaCosta/PSN-Price-Tracker/main/docs/swagger-schemas.png",
+      "https://raw.githubusercontent.com/IgorGarciaCosta/PSN-Price-Tracker/main/docs/swagger-endpoint.png",
+      "https://raw.githubusercontent.com/IgorGarciaCosta/PSN-Price-Tracker/main/docs/swagger-auth.png",
+      "https://raw.githubusercontent.com/IgorGarciaCosta/PSN-Price-Tracker/main/docs/swagger-response.png",
+    ],
+    tags: ["Web", "Backend"],
   },
   {
     title: "Smart Mesh Cleaner Pro",
@@ -95,6 +109,7 @@ const ALL_TAGS: readonly (Tag | "All")[] = [
   "All",
   "Unreal / C++",
   "Web",
+  "Backend",
   "Tools",
   "VR",
 ] as const;

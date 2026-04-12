@@ -61,8 +61,13 @@ export default function ParticleBackground() {
 
   /* 5. canvas limitado ao container (100 % área da Home) */
   return (
-    <div className="absolute inset-0 -z-10">
-      <Particles id="tsparticles" options={options} key={isDark ? "d" : "l"} />
+    <div className="absolute inset-0 -z-10 h-full w-full">
+      <Particles
+        id="tsparticles"
+        options={options}
+        key={isDark ? "d" : "l"}
+        style={{ width: "100%", height: "100%" }}
+      />
     </div>
   );
 }

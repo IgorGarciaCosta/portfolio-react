@@ -4,7 +4,7 @@ import TypewriterText from "@/components/TypewriterText";
 
 export default function Home() {
   return (
-    <section className="relative grid min-h-[calc(100vh-6rem)] place-items-center">
+    <section className="relative grid min-h-[100vh] min-h-[100dvh] md:min-h-[calc(100vh-6rem)] md:min-h-[calc(100dvh-6rem)] place-items-center">
       <ParticleBackground />
 
       <div className="relative z-10 flex max-w-xl flex-col items-center gap-6 px-8 py-12 text-center">

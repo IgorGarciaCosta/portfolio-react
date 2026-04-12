@@ -37,6 +37,16 @@ html.dark {
   --dot-size: 1px;                     /* raio = 1 px ⇒ ponto 2 px */
 }
 
+/* força o canvas das partículas a preencher o container */
+#tsparticles {
+  width: 100% !important;
+  height: 100% !important;
+}
+#tsparticles canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 /* scroll suave para anchors/scrollIntoView */
 html {
   scroll-behavior: smooth;

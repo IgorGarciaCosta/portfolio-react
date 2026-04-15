@@ -5,11 +5,18 @@ import { IoChatbubbleEllipsesOutline, IoClose, IoSend } from "react-icons/io5";
 interface Message {
   role: "user" | "model";
   text: string;
+  isWelcome?: boolean;
 }
+
+const WELCOME_MESSAGE: Message = {
+  role: "model",
+  text: "Hi! I'm Igor's portfolio assistant. Ask me about his projects, skills, or experience!",
+  isWelcome: true,
+};
 
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -28,11 +35,13 @@ export function Chatbot() {
     setInput("");
     setLoading(true);
 
-    // Build history in Gemini format (exclude current message)
-    const history = messages.map((m) => ({
-      role: m.role,
-      parts: [{ text: m.text }],
-    }));
+    // Build history in Gemini format (exclude welcome + current message)
+    const history = messages
+      .filter((m) => !m.isWelcome)
+      .map((m) => ({
+        role: m.role,
+        parts: [{ text: m.text }],
+      }));
 
     try {
       const res = await fetch("/api/chat", {
@@ -112,12 +121,6 @@ export function Chatbot() {
 
             {/* Messages */}
             <div className="flex-1 space-y-3 overflow-y-auto p-4 text-sm">
-              {messages.length === 0 && (
-                <p className="text-center text-gray-500">
-                  Send a message to start chatting.
-                </p>
-              )}
-
               {messages.map((m, i) => (
                 <div
                   key={i}

@@ -136,8 +136,10 @@ export function Chatbot() {
               ))}
 
               {loading && (
-                <div className="mr-auto max-w-[80%] rounded-xl bg-gray-800 px-3 py-2 text-gray-400">
-                  Thinking…
+                <div className="mr-auto flex max-w-[80%] items-center gap-1 rounded-xl bg-gray-800 px-4 py-3">
+                  <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0ms]" />
+                  <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:150ms]" />
+                  <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:300ms]" />
                 </div>
               )}
 

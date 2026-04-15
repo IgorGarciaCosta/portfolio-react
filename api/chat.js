@@ -1,43 +1,86 @@
 // api/chat.js
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const pdfParse = require('pdf-parse/lib/pdf-parse.js');
 
-const SYSTEM_PROMPT = `You are the virtual assistant for Igor Garcia's portfolio website. Your role is to answer questions about Igor's career, skills, projects, and experience in a friendly and professional tone. Always answer in the same language the user writes in.
-
-## About Igor Garcia
-- Software Engineer / Computer Engineer with 4+ years of experience
-- Currently at Ford Motor Company — building virtual prototypes to cut physical mock-up costs and speed design decisions
-- Previously at Blue Gravity Studios — delivered multiplayer gameplay and responsive UI for SkateNation XL
-- Uses Claude Opus 4 and Codex as productivity tools for architecture and problem-solving
-
-## Technical Skills
-**Frontend**: JavaScript, TypeScript, React, Tailwind CSS, CSS3, HTML5
-**Backend**: C++, Python, Node.js
-**Tools**: Unreal Engine, GitHub, Git, Figma, Jira, NPM, Vite, Blender, Substance Painter 3D, ZBrush
-**Currently Learning**: ASP.NET (RESTful APIs, MVC, Identity), AWS (EC2, S3, Lambda), Oracle Cloud (OCI)
-
-## Projects
-1. **SkateNationXL** — Multiplayer skateboarding game (C++, Unreal Engine, network replication, online sessions)
-2. **Laser Launcher Robot** — Full-pipeline solo project (Niagara FX, Lumen, Nanite, UE5)
-3. **Skateboarding Prototype** — 48-hour rapid prototype (fluid movement, tricks, score tracking)
-4. **VR Bedroom Simulation** — Immersive XR experience for Vive XR Elite (interactive objects, cinematic lighting)
-5. **Platform 2D Game** — Weekend platformer (Paper 2D, Flipbooks, AI, collectibles)
-6. **Realtime Mesh Exporter** — Published plugin on FAB marketplace (runtime-exported skinned meshes)
-7. **OpenAI UE5 Integration Plugin** — Embeds OpenAI APIs in Unreal Engine (text, image, code generation)
-8. **Keyboard Heatmap** — Analytics tool tracking keystroke data with interactive heatmaps & XML reports
-9. **Unused Plugins Handler** — Audits and disables unused Unreal plugins automatically
-10. **Smart Mesh Cleaner Pro** — Blender add-on with Smart Trash Bin system
-11. **CryptoChecker** — Full-stack React app (live crypto price monitoring, email alerts)
-12. **PSN Price Tracker** — Full-stack ASP.NET Core (.NET 9) + Telegram bot (web scraping, REST API, Swagger, SQLite, Docker)
+/* ------------------------------------------------------------------ */
+/*  Hardcoded instructions (always present, regardless of PDF status)  */
+/* ------------------------------------------------------------------ */
+const INSTRUCTIONS = `You are the virtual assistant for Igor Garcia's portfolio website. Your role is to answer questions about Igor's career, skills, projects, and experience in a friendly and professional tone. Always answer in the same language the user writes in.
 
 ## Contact & Links
 - LinkedIn: https://www.linkedin.com/in/igor-garcia-5a449a1b5/
 - GitHub: https://github.com/IgorGarciaCosta
 - ArtStation: https://igorgarcia6.artstation.com/
 
-## Instructions
+## Behavior
 - If asked about something unrelated to Igor's career or portfolio, politely redirect the conversation.
 - Keep answers concise but informative.
-- You may suggest the user check specific sections of the portfolio or download Igor's CV for more details.`;
+- You may suggest the user check specific sections of the portfolio or download Igor's CV for more details.
+- Base your answers primarily on the CV content provided below. If the CVs don't cover a topic, say you don't have that information.`;
 
+/* ------------------------------------------------------------------ */
+/*  Fallback prompt (used when PDF extraction fails)                   */
+/* ------------------------------------------------------------------ */
+const FALLBACK_CV = `## About Igor Garcia
+- Software Engineer / Computer Engineer with 4+ years of experience
+- Currently at Ford Motor Company — building virtual prototypes to cut physical mock-up costs and speed design decisions
+- Previously at Blue Gravity Studios — delivered multiplayer gameplay and responsive UI for SkateNation XL
+
+## Technical Skills
+**Frontend**: JavaScript, TypeScript, React, Tailwind CSS, CSS3, HTML5
+**Backend**: C++, Python, Node.js
+**Tools**: Unreal Engine, GitHub, Git, Figma, Jira, NPM, Vite, Blender, Substance Painter 3D, ZBrush`;
+
+/* ------------------------------------------------------------------ */
+/*  PDF helpers + module-level cache                                   */
+/* ------------------------------------------------------------------ */
+const PDF_FILES = [
+  { label: 'Real-Time Systems Engineer CV', file: 'IgorGarcia_RealTime_Systems_Engineer.pdf' },
+  { label: 'Backend Software Engineer CV', file: 'IgorGarcia_Backend_Software_Engineer.pdf' },
+];
+
+let cachedPrompt = null;
+
+function getBaseUrl() {
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'http://localhost:5173';
+}
+
+async function fetchPdfText(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`PDF fetch failed: ${res.status} ${url}`);
+  const arrayBuffer = await res.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+  const { text } = await pdfParse(buffer);
+  return text.trim();
+}
+
+async function getSystemPrompt() {
+  if (cachedPrompt) return cachedPrompt;
+
+  const base = getBaseUrl();
+
+  try {
+    const cvTexts = await Promise.all(
+      PDF_FILES.map(async ({ label, file }) => {
+        const text = await fetchPdfText(`${base}/${file}`);
+        return `## ${label}\n${text}`;
+      }),
+    );
+
+    cachedPrompt = `${INSTRUCTIONS}\n\n${cvTexts.join('\n\n')}`;
+  } catch (err) {
+    console.error('PDF extraction failed, using fallback:', err.message);
+    cachedPrompt = `${INSTRUCTIONS}\n\n${FALLBACK_CV}`;
+  }
+
+  return cachedPrompt;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Handler                                                            */
+/* ------------------------------------------------------------------ */
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -47,6 +90,8 @@ export default async function handler(req, res) {
   if (!message) {
     return res.status(400).json({ error: 'Missing message' });
   }
+
+  const systemPrompt = await getSystemPrompt();
 
   // Build contents array for multi-turn conversation
   const contents = [
@@ -61,7 +106,7 @@ export default async function handler(req, res) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          systemInstruction: { parts: [{ text: systemPrompt }] },
           contents,
         }),
       },

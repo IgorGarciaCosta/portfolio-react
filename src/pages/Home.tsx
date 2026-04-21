@@ -58,9 +58,9 @@ export default function Home() {
             </span>
           </a>
 
-          {/* ---------------- botão Backend Dev CV com animação "wipe" ---------------- */}
+          {/* ---------------- botão Software Dev CV com animação "wipe" ---------------- */}
           <a
-            href="/IgorGarcia_Backend_Software_Engineer.pdf"
+            href="/IgorGarcia_Software_Development_Engineer.pdf"
             download
             className="
               group relative inline-block overflow-hidden rounded border-2
@@ -78,7 +78,7 @@ export default function Home() {
               "
             />
             <span className="relative z-10 group-hover:text-white">
-              Backend Dev CV
+              Software Dev CV
             </span>
           </a>
         </div>

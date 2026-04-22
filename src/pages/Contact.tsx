@@ -48,6 +48,7 @@ export default function Contact() {
   });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -57,6 +58,7 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
     try {
       const res = await fetch("/api/contact", {
@@ -70,7 +72,7 @@ export default function Contact() {
       setSent(true);
       setForm({ name: "", email: "", message: "" });
     } catch {
-      alert("Sorry, failed to send. Try again later.");
+      setError("Sorry, failed to send. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -136,17 +138,33 @@ export default function Contact() {
         <div className="mx-auto w-full max-w-lg">
           <div className="rounded-lg bg-gray-100 p-6 text-gray-900 dark:bg-gray-800/80 dark:text-gray-100">
             {sent ? (
-              <p className="rounded bg-green-100/80 p-4 text-green-800 dark:bg-green-900/40 dark:text-green-200">
+              <p
+                role="status"
+                aria-live="polite"
+                className="rounded bg-green-100/80 p-4 text-green-800 dark:bg-green-900/40 dark:text-green-200"
+              >
                 Thank you! Your message has been sent ✨
               </p>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                {error && (
+                  <div
+                    role="alert"
+                    aria-live="assertive"
+                    className="rounded bg-red-100/80 p-3 text-sm text-red-800 dark:bg-red-900/40 dark:text-red-200"
+                  >
+                    {error}
+                  </div>
+                )}
+
                 <div>
-                  <label className="mb-1 block text-sm font-medium">Name</label>
+                  <label htmlFor="name" className="mb-1 block text-sm font-medium">Name</label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     required
+                    aria-required="true"
                     value={form.name}
                     onChange={handleChange}
                     className="w-full rounded bg-white px-3 py-2 dark:bg-gray-900"
@@ -155,13 +173,15 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-sm font-medium">
+                  <label htmlFor="email" className="mb-1 block text-sm font-medium">
                     Email
                   </label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     required
+                    aria-required="true"
                     value={form.email}
                     onChange={handleChange}
                     className="w-full rounded bg-white px-3 py-2 dark:bg-gray-900"
@@ -170,12 +190,14 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-sm font-medium">
+                  <label htmlFor="message" className="mb-1 block text-sm font-medium">
                     Message
                   </label>
                   <textarea
+                    id="message"
                     name="message"
                     required
+                    aria-required="true"
                     rows={5}
                     value={form.message}
                     onChange={handleChange}

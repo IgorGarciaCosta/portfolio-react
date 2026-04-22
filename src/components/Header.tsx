@@ -37,11 +37,12 @@ export function Header({ current, onNav }: Props) {
 
   return (
     <header className={headerClasses}>
-      <nav className="relative flex w-full items-center px-6 py-4">
+      <nav aria-label="Main navigation" className="relative flex w-full items-center px-6 py-4">
         {/* ---------------- brand ---------------- */}
-        <span
+        <button
+          type="button"
           onClick={() => onNav("home")}
-          className="absolute left-6 flex cursor-pointer items-center"
+          className="absolute left-6 flex cursor-pointer items-center bg-transparent border-none p-0"
           aria-label="Igor Garcia — Home"
         >
           <svg
@@ -67,24 +68,36 @@ export function Header({ current, onNav }: Props) {
               IG
             </text>
           </svg>
-        </span>
+        </button>
 
         {/* ---------------- menu ---------------- */}
         <ul className="mx-auto flex gap-6">
-          <li className={navClasses("about")} onClick={() => onNav("about")}>
-            About
+          <li>
+            <button
+              type="button"
+              className={navClasses("about")}
+              onClick={() => onNav("about")}
+            >
+              About
+            </button>
           </li>
-          <li
-            className={navClasses("projects")}
-            onClick={() => onNav("projects")}
-          >
-            Projects
+          <li>
+            <button
+              type="button"
+              className={navClasses("projects")}
+              onClick={() => onNav("projects")}
+            >
+              Projects
+            </button>
           </li>
-          <li
-            className={navClasses("contact")}
-            onClick={() => onNav("contact")}
-          >
-            Contact
+          <li>
+            <button
+              type="button"
+              className={navClasses("contact")}
+              onClick={() => onNav("contact")}
+            >
+              Contact
+            </button>
           </li>
         </ul>
 

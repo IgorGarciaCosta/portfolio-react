@@ -54,9 +54,16 @@ export default function App() {
   /* ----------------------------- layout --------------------------- */
   return (
     <div className="flex min-h-screen flex-col">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+
       <Header current={current} onNav={scrollTo} />
 
-      <main className="flex-1 pt-24">
+      <main id="main-content" tabIndex={-1} className="flex-1 pt-24 outline-none">
         {/* ---------- Home (sem pontinhos) ---------- */}
         <section ref={refs.home} data-section="home" id="home">
           <Home />

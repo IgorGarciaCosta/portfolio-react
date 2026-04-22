@@ -54,7 +54,7 @@ export default function Home() {
               "
             />
             <span className="relative z-10 group-hover:text-white">
-              Unreal Dev CV
+              GameDev CV
             </span>
           </a>
 

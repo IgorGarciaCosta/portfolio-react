@@ -239,10 +239,11 @@ export default function About() {
         cut physical mock-up costs and speed design decisions. Previously, at
         <strong> Blue Gravity Studios</strong>, I delivered multiplayer gameplay
         and responsive UI for <em className="italic">SkateNation&nbsp;XL</em>. I
-        also worked at <strong>Estúdio Cafundó</strong>, where I programmed an
-        interactive AI avatar totem in <strong>C#</strong> — a public-facing
-        installation blending generative AI with a custom kiosk interface. More
-        recently, I’ve also been expanding into backend engineering with
+        also worked at <strong>Cafundó Creative Studios</strong>, where I
+        programmed an interactive AI avatar totem in <strong>C#</strong> — a
+        public-facing installation blending generative AI with a custom kiosk
+        interface. More recently, I’ve also been expanding into backend
+        engineering with
         <strong> C# / ASP.NET</strong>, designing APIs and production-minded
         services.
       </p>

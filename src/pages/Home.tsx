@@ -58,7 +58,7 @@ export default function Home() {
             </span>
           </a>
 
-          {/* ---------------- botão Software Dev CV com animação "wipe" ---------------- */}
+          {/* ---------------- botão Software Engineer CV com animação "wipe" ---------------- */}
           <a
             href="/IgorGarcia_Software_Development_Engineer.pdf"
             download
@@ -78,7 +78,7 @@ export default function Home() {
               "
             />
             <span className="relative z-10 group-hover:text-white">
-              Software Dev CV
+              Software Engineer CV
             </span>
           </a>
         </div>

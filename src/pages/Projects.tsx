@@ -14,6 +14,20 @@ const PROJECTS: {
   links?: ProjectLink[];
 }[] = [
   {
+    title: "Interactive Totem — Selfie with Lis",
+    description:
+      "Interactive AI avatar totem developed at Estúdio Cafundó. Programmed in C#, the installation lets visitors interact with a real-time AI-driven character — blending generative AI and a custom kiosk interface into a seamless public experience.",
+    videoSrc: "https://www.youtube.com/embed/OgaoAdtmf34",
+    tags: ["C#"],
+    links: [
+      {
+        label: "Product Page",
+        url: "https://www.cafundo.tv/selfie-com-lis/",
+        icon: "external",
+      },
+    ],
+  },
+  {
     title: "SkateNationXL",
     description:
       "Multiplayer skateboarding game where I worked as a C++ Software Engineer — contributing to core gameplay systems, network replication and online session management to deliver a smooth, responsive multiplayer experience.",
@@ -189,6 +203,7 @@ const PROJECTS: {
 const ALL_TAGS: readonly (Tag | "All")[] = [
   "All",
   "Unreal / C++",
+  "C#",
   "Web",
   "Backend",
   "Tools",

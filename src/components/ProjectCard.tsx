@@ -15,7 +15,7 @@ function ytThumb(embed: string) {
   return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
 }
 
-type Tag = "Unreal / C++" | "Web" | "Backend" | "Tools" | "VR";
+type Tag = "Unreal / C++" | "Web" | "Backend" | "Tools" | "VR" | "C#";
 
 type ProjectLink = {
   label: string;

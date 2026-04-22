@@ -37,7 +37,10 @@ export function Header({ current, onNav }: Props) {
 
   return (
     <header className={headerClasses}>
-      <nav aria-label="Main navigation" className="relative flex w-full items-center px-6 py-4">
+      <nav
+        aria-label="Main navigation"
+        className="relative flex w-full items-center px-6 py-4"
+      >
         {/* ---------------- brand ---------------- */}
         <button
           type="button"

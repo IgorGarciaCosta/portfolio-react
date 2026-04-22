@@ -51,7 +51,7 @@ export default function Contact() {
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => setForm({ ...form, [e.target.name]: e.target.value });
 
   //
@@ -158,7 +158,12 @@ export default function Contact() {
                 )}
 
                 <div>
-                  <label htmlFor="name" className="mb-1 block text-sm font-medium">Name</label>
+                  <label
+                    htmlFor="name"
+                    className="mb-1 block text-sm font-medium"
+                  >
+                    Name
+                  </label>
                   <input
                     id="name"
                     type="text"
@@ -173,7 +178,10 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="mb-1 block text-sm font-medium">
+                  <label
+                    htmlFor="email"
+                    className="mb-1 block text-sm font-medium"
+                  >
                     Email
                   </label>
                   <input
@@ -190,7 +198,10 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="mb-1 block text-sm font-medium">
+                  <label
+                    htmlFor="message"
+                    className="mb-1 block text-sm font-medium"
+                  >
                     Message
                   </label>
                   <textarea

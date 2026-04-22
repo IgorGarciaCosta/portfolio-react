@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
 import { Chatbot } from "@/components/Chatbot";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -61,9 +62,14 @@ export default function App() {
         Skip to main content
       </a>
 
+      <ScrollProgress />
       <Header current={current} onNav={scrollTo} />
 
-      <main id="main-content" tabIndex={-1} className="flex-1 pt-24 outline-none">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pt-24 outline-none"
+      >
         {/* ---------- Home (sem pontinhos) ---------- */}
         <section ref={refs.home} data-section="home" id="home">
           <Home />

@@ -14,27 +14,31 @@ import {
   SiHtml5,
   /* backend */
   SiCplusplus,
+  SiSharp,
   SiPython,
   SiNodedotjs,
+  SiDotnet,
+  SiPostgresql,
+  SiSqlite,
+  SiFirebase,
+  SiDocker,
   SiGit,
   /* tools */
   SiUnrealengine,
+  SiUnity,
   SiGithub,
+  SiGithubactions,
   SiFigma,
   SiJirasoftware,
   SiNpm,
   SiVite,
-  SiBlender,
   /* currently learning */
-  SiDotnet,
   SiAmazonwebservices,
   SiOracle,
 } from "react-icons/si";
 
 import {
-  /* ícones genéricos (fontawesome) como fallback */
-  FaPaintBrush, // ZBrush
-  FaCube, // Substance Painter 3D
+  FaDatabase, // SQL generic
 } from "react-icons/fa";
 
 /* -------------------------- variantes de animação --------------------------- */
@@ -102,19 +106,14 @@ type LearningItem = { icon: React.ReactNode; label: string; desc: string };
 
 const currentlyLearning: LearningItem[] = [
   {
-    icon: <SiDotnet />,
-    label: "ASP.NET",
-    desc: "RESTful APIs, MVC architecture & Identity",
-  },
-  {
     icon: <SiAmazonwebservices />,
     label: "AWS",
-    desc: "EC2, S3, Lambda & cloud architecture",
+    desc: "Lambda, API Gateway, DynamoDB, SQS & CloudWatch",
   },
   {
     icon: <SiOracle />,
     label: "Oracle Cloud",
-    desc: "OCI infrastructure & cloud services",
+    desc: "OCI infrastructure & cloud deployments",
   },
 ];
 
@@ -197,22 +196,28 @@ const frontend: Skill[] = [
 ];
 
 const backend: Skill[] = [
+  { icon: <SiSharp />, label: "C#" },
   { icon: <SiCplusplus />, label: "C++" },
   { icon: <SiPython />, label: "Python" },
+  { icon: <SiDotnet />, label: "ASP.NET Core" },
   { icon: <SiNodedotjs />, label: "Node.js" },
+  { icon: <FaDatabase />, label: "SQL" },
+  { icon: <SiPostgresql />, label: "PostgreSQL" },
+  { icon: <SiSqlite />, label: "SQLite" },
+  { icon: <SiFirebase />, label: "Firebase" },
+  { icon: <SiDocker />, label: "Docker" },
 ];
 
 const tools: Skill[] = [
-  { icon: <SiUnrealengine />, label: "Unreal Engine" },
-  { icon: <SiGithub />, label: "GitHub" },
   { icon: <SiGit />, label: "Git" },
+  { icon: <SiGithub />, label: "GitHub" },
+  { icon: <SiGithubactions />, label: "GitHub Actions" },
+  { icon: <SiVite />, label: "Vite" },
+  { icon: <SiNpm />, label: "NPM" },
   { icon: <SiFigma />, label: "Figma" },
   { icon: <SiJirasoftware />, label: "Jira" },
-  { icon: <SiNpm />, label: "NPM" },
-  { icon: <SiVite />, label: "Vite" },
-  { icon: <SiBlender />, label: "Blender" },
-  { icon: <FaCube />, label: "Substance Painter 3D" },
-  { icon: <FaPaintBrush />, label: "ZBrush" },
+  { icon: <SiUnrealengine />, label: "Unreal Engine" },
+  { icon: <SiUnity />, label: "Unity" },
 ];
 
 /* --------------------------- componente principal --------------------------- */
@@ -233,8 +238,11 @@ export default function About() {
         At <strong>Ford Motor Company</strong> I build virtual prototypes that
         cut physical mock-up costs and speed design decisions. Previously, at
         <strong> Blue Gravity Studios</strong>, I delivered multiplayer gameplay
-        and responsive UI for <em className="italic">SkateNation&nbsp;XL</em>.
-        More recently, I’ve also been expanding into backend engineering with
+        and responsive UI for <em className="italic">SkateNation&nbsp;XL</em>. I
+        also worked at <strong>Estúdio Cafundó</strong>, where I programmed an
+        interactive AI avatar totem in <strong>C#</strong> — a public-facing
+        installation blending generative AI with a custom kiosk interface. More
+        recently, I’ve also been expanding into backend engineering with
         <strong> C# / ASP.NET</strong>, designing APIs and production-minded
         services.
       </p>

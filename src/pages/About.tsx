@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import profileImg from "@/assets/profile.jpg";
+import ExperienceTimeline from "@/components/ExperienceTimeline";
 
 /* ------------------------- ICONES -------------------------- */
 import {
@@ -235,15 +236,11 @@ export default function About() {
       </p>
 
       <p>
-        At <strong>Ford Motor Company</strong> I build virtual prototypes that
-        cut physical mock-up costs and speed design decisions. Previously, at
-        <strong> Blue Gravity Studios</strong>, I delivered multiplayer gameplay
-        and responsive UI for <em className="italic">SkateNation&nbsp;XL</em>. I
-        also worked at <strong>Cafundó Creative Studios</strong>, where I
-        programmed an interactive AI avatar totem in <strong>C#</strong> — a
-        public-facing installation blending generative AI with a custom kiosk
-        interface. More recently, I’ve also been expanding into backend
-        engineering with
+        I've shipped real-time products across industries — from virtual
+        prototyping at <strong>Ford</strong> to multiplayer gameplay at{" "}
+        <strong>Blue Gravity Studios</strong> and interactive AI installations
+        at <strong>Cafundó Creative Studios</strong>. More recently, I've also
+        been expanding into backend engineering with
         <strong> C# / ASP.NET</strong>, designing APIs and production-minded
         services.
       </p>
@@ -299,6 +296,12 @@ export default function About() {
           {summary}
         </motion.div>
       </div>
+
+      {/* ----------------------------- experience ----------------------------- */}
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+        Experience
+      </h2>
+      <ExperienceTimeline />
 
       {/* --------------------------- technical skills --------------------------- */}
       <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">

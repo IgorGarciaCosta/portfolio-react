@@ -1,15 +1,18 @@
 /* --------------------------- src/App.tsx --------------------------- */
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
-import { Chatbot } from "@/components/Chatbot";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 import Home from "@/pages/Home";
-import About from "@/pages/About";
-import Projects from "@/pages/Projects";
-import Contact from "@/pages/Contact";
+
+const About = lazy(() => import("@/pages/About"));
+const Projects = lazy(() => import("@/pages/Projects"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const Chatbot = lazy(() =>
+  import("@/components/Chatbot").then((m) => ({ default: m.Chatbot })),
+);
 
 type SectionKey = "home" | "about" | "projects" | "contact";
 type SectionRefs = { [K in SectionKey]: React.RefObject<HTMLElement | null> };
@@ -89,21 +92,29 @@ export default function App() {
             id="about"
             className="pt-32 md:pt-48"
           >
-            <About />
+            <Suspense fallback={<div className="min-h-[50vh]" />}>
+              <About />
+            </Suspense>
           </section>
 
           <section ref={refs.projects} data-section="projects" id="projects">
-            <Projects />
+            <Suspense fallback={<div className="min-h-[50vh]" />}>
+              <Projects />
+            </Suspense>
           </section>
 
           <section ref={refs.contact} data-section="contact" id="contact">
-            <Contact />
+            <Suspense fallback={<div className="min-h-[50vh]" />}>
+              <Contact />
+            </Suspense>
           </section>
         </div>
       </main>
 
       <BackToTop />
-      <Chatbot />
+      <Suspense fallback={null}>
+        <Chatbot />
+      </Suspense>
       <Footer />
     </div>
   );

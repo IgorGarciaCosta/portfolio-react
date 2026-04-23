@@ -10,6 +10,7 @@ Personal portfolio built with React, TypeScript, and Vite showcasing my work as 
 - **3-card project carousel** with Framer Motion transitions and embedded YouTube videos (12 projects)
 - **AI chatbot** powered by Google Gemini with CV-aware context
 - **Dark / Light / System theme** toggle with localStorage persistence and OS preference detection
+- **Git-graph experience timeline** with SVG branch/merge lines, color-coded lanes, and animated dots
 - **Animated skill icons grid** organized by Frontend, Backend, and Tools
 - **Contact form** powered by a Vercel serverless function (Nodemailer)
 - **Back to top button** with spring animation on scroll
@@ -61,7 +62,7 @@ Set these on your Vercel dashboard:
 
 ```
 src/
-├── components/     # Header, Footer, Chatbot, BackToTop, ImageCarousel, ProjectCard, etc.
+├── components/     # Header, Footer, Chatbot, BackToTop, ExperienceTimeline, ImageCarousel, ProjectCard, etc.
 ├── contexts/       # ThemeContext / ThemeProvider (shared dark/light/system state)
 ├── hooks/          # useTheme (convenience wrapper around ThemeContext)
 ├── pages/          # Home, About, Projects, Contact

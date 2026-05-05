@@ -148,6 +148,11 @@ export const PROJECTS: Project[] = [
         url: "https://github.com/IgorGarciaCosta/Resume-Matcher-Job-Search-Platform",
         icon: "github",
       },
+      {
+        label: "Live Demo",
+        url: "https://resume-matcher-job-search-platform.vercel.app/",
+        icon: "external",
+      },
     ],
   },
   {

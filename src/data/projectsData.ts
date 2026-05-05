@@ -137,6 +137,20 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    title: "Resume Matcher — AI Job Search Platform",
+    description:
+      "Full-stack application that aggregates remote job listings from 7+ job boards and uses Google Gemini AI to analyze resume-to-job match. Features user authentication with JWT HttpOnly cookies, saved analysis history, a 3D interactive globe, and PDF resume parsing — built with ASP.NET Core 9, React 19, TypeScript, PostgreSQL and deployed via Docker on Render.",
+    videoSrc: "https://www.youtube.com/embed/BeA48l5wG2s",
+    tags: ["Web", "Backend"],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/Resume-Matcher-Job-Search-Platform",
+        icon: "github",
+      },
+    ],
+  },
+  {
     title: "Cripto Checker",
     description:
       "Full-stack React web app that monitors live crypto prices and fires personalised email alerts the moment user-defined thresholds are crossed — combining real-time API integration with a clean, responsive UI.",

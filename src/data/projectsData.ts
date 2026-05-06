@@ -67,6 +67,34 @@ export const PROJECTS: Project[] = [
     tags: ["Unreal / C++", "Tools"],
   },
   {
+    title: "Unreal Measurement Tool Plugin",
+    description:
+      "Spline-based measurement plugin for Unreal Engine 5.7 that measures distances and areas in-editor with real-time visual feedback. Features multiple units (cm, m, km, ft, in, yd), linear/curve splines, snap-to-geometry modes, cumulative & angle labels, area calculation via Shoelace formula, and a custom Editor Mode with a dedicated toolkit panel. Published on the FAB marketplace.",
+    images: [
+      "/projects/measurement-tool/overview.png",
+      "/projects/measurement-tool/linearMeasurement.png",
+      "/projects/measurement-tool/curveMeasurement.png",
+      "/projects/measurement-tool/areaMeasurement.png",
+      "/projects/measurement-tool/irregularAreaMeasurement.png",
+      "/projects/measurement-tool/snapToSurface.png",
+      "/projects/measurement-tool/cumulativeLabels.png",
+      "/projects/measurement-tool/angleLabels.png",
+    ],
+    tags: ["Unreal / C++", "Tools"],
+    links: [
+      {
+        label: "FAB Marketplace",
+        url: "https://www.fab.com/listings/5c2a20d1-1537-4ca3-9255-405d38b79b05",
+        icon: "external",
+      },
+      {
+        label: "GitHub",
+        url: "https://github.com/IgorGarciaCosta/UnrealMeasurementToolPlugin",
+        icon: "github",
+      },
+    ],
+  },
+  {
     title: "OpenAI UE5 integration Plugin",
     description:
       "Editor plugin that embeds OpenAI's text, image and code-generation APIs directly inside Unreal Engine, turning the IDE into a unified AI-powered workspace and cutting context-switching time for the entire team.",

@@ -36,7 +36,7 @@ const FALLBACK_CV = `## About Igor Garcia
 /*  PDF helpers + module-level cache                                   */
 /* ------------------------------------------------------------------ */
 const PDF_FILES = [
-  { label: 'Real-Time Systems Engineer CV', file: 'IgorGarcia_RealTime_Systems_Engineer.pdf' },
+  { label: 'Gameplay Engineer CV', file: 'IgorGarcia_Gameplay_Engineer.pdf' },
   { label: 'Software Development Engineer CV', file: 'IgorGarcia_Software_Development_Engineer.pdf' },
 ];
 

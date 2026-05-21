@@ -60,7 +60,7 @@ export default function Home() {
 
           {/* ---------------- botão Software Engineer CV com animação "wipe" ---------------- */}
           <a
-            href="/IgorGarcia_Software_Development_Engineer.pdf"
+            href="/IgorGarcia_Software_Development_Engineer.docx"
             download
             className="
               group relative inline-block overflow-hidden rounded border-2

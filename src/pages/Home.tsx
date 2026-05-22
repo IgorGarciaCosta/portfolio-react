@@ -36,7 +36,7 @@ export default function Home() {
 
           {/* ---------------- botão Unreal Dev CV com animação "wipe" ---------------- */}
           <a
-            href="/IgorGarcia_Gameplay_Engineer.pdf"
+            href="/IgorGarcia_Gameplay_Engineer.docx"
             download
             className="
               group relative inline-block overflow-hidden rounded border-2

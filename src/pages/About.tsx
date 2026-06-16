@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import profileImg from "@/assets/profile.jpg";
+import profileImg from "@/assets/profile.png";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 import SkillSection from "@/components/about/SkillSection";
 import CurrentlyLearningSection from "@/components/about/CurrentlyLearningSection";
@@ -13,29 +13,34 @@ export default function About() {
   const summary = (
     <div className="space-y-4 text-justify leading-7">
       <p>
-        I’m <strong>Igor Garcia</strong>, a Computer Engineer with 4 + years
-        crafting real-time experiences in <strong>C++ / Unreal Engine</strong>.
-        My work also spans web engineering, with a strong focus on backend
-        development using <strong>C#</strong>, <strong>ASP.NET</strong>, and
-        <strong> Python</strong>, plus frontend delivery with
-        <strong> JavaScript</strong>, <strong>React</strong>, and
-        <strong> Tailwind CSS</strong> where needed.
+        I’m <strong>Igor Garcia</strong>, a Software Engineer with 4+ years
+        of experience building high-performance internal tooling, automated
+        workflows, and network-aware applications. Strong background in{" "}
+        <strong>C++</strong> and <strong>C#</strong>, with a proven track record
+        of optimizing complex systems and reducing manual operations for
+        engineering teams. <strong>EU Citizen</strong> open to relocation
+        (Ireland/UK/EU) or remote work.
       </p>
 
       <p>
-        I've shipped real-time products across industries — from virtual
-        prototyping at <strong>Ford</strong> to multiplayer gameplay at{" "}
-        <strong>Blue Gravity Studios</strong> and interactive AI installations
-        at <strong>Cafundó Creative Studios</strong>. More recently, I've also
-        been expanding into backend engineering with
-        <strong> C# / ASP.NET</strong>, designing APIs and production-minded
-        services.
+        Currently a Software Engineer / C++ Developer at{" "}
+        <strong>Ford Motor Company</strong>, engineering high-performance
+        internal software tooling and automated validation pipelines, replacing
+        physical prototypes and contributing to significant cost reductions.
+        Previously built core network replication logic for multiplayer
+        architecture at <strong>Blue Gravity Studios</strong> and architected
+        AI-powered interactive installations at{" "}
+        <strong>Cafundó Creative Studio</strong>.
       </p>
 
       <p>
-        I use AI assistants as a productivity aid, mainly{" "}
-        <strong>Claude Opus 4.6</strong> and <strong>Codex</strong>, so I can
-        stay focused on architecture and problem solving.
+        Deeply passionate about systems engineering, backend architecture, and
+        cloud infrastructure. Currently leveraging{" "}
+        <strong>AWS</strong> services to build scalable, automated solutions,
+        with hands-on experience in containerized deployments (
+        <strong>Docker</strong>) and CI/CD automation. Also expanding into
+        backend engineering with <strong>C# / ASP.NET</strong>, designing APIs
+        and production-minded services.
       </p>
 
       <p>

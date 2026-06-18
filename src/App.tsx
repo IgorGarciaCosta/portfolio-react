@@ -32,7 +32,7 @@ export default function App() {
 
   const [current, setCurrent] = useState<SectionKey>("home");
 
-  /* IntersectionObserver que marca a seção atual ------------------ */
+  /* IntersectionObserver that tracks the current section ------------------ */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -73,16 +73,16 @@ export default function App() {
         tabIndex={-1}
         className="flex-1 pt-24 outline-none"
       >
-        {/* ---------- Home (sem pontinhos) ---------- */}
+        {/* ---------- Home (no dots) ---------- */}
         <section ref={refs.home} data-section="home" id="home">
           <Home />
         </section>
 
-        {/* ---------- Demais seções ---------- */}
+        {/* ---------- Other sections ---------- */}
         <div
           className="
-            bg-dots                    /* padrão pontilhado */
-            mask-fade-top              /* gradiente de opacidade no topo */
+            bg-dots                    /* dotted pattern */
+            mask-fade-top              /* opacity gradient at the top */
             flex flex-col space-y-32 md:space-y-48
           "
         >

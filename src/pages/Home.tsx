@@ -1,4 +1,4 @@
-/* -------------- Home.tsx (hover "wipe" nos botões de CV) -------------- */
+/* -------------- Home.tsx (hover "wipe" on CV buttons) -------------- */
 import ParticleBackground from "@/components/ParticleBackground";
 import TypewriterText from "@/components/TypewriterText";
 
@@ -25,7 +25,7 @@ export default function Home() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">
-          {/* ---------------- botão Projects (inalterado) ---------------- */}
+          {/* ---------------- Projects button (unchanged) ---------------- */}
           <a
             href="#projects"
             className="inline-block rounded bg-blue-600 px-6 py-3 font-medium text-white
@@ -34,7 +34,7 @@ export default function Home() {
             See Projects
           </a>
 
-          {/* ---------------- botão Unreal Dev CV com animação "wipe" ---------------- */}
+          {/* ---------------- Unreal Dev CV button with "wipe" animation ---------------- */}
           <a
             href="/IgorGarcia_Gameplay_Engineer.docx"
             download
@@ -58,7 +58,7 @@ export default function Home() {
             </span>
           </a>
 
-          {/* ---------------- botão Software Engineer CV com animação "wipe" ---------------- */}
+          {/* ---------------- Software Engineer CV button with "wipe" animation ---------------- */}
           <a
             href="/IgorGarcia_Software_Development_Engineer.docx"
             download

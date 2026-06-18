@@ -10,7 +10,7 @@ import {
 import { useTheme } from "@/hooks/useTheme";
 
 export default function ParticleBackground() {
-  /* 1. carrega plugins 1× */
+  /* 1. load plugins once */
   const loaded = useRef(false);
   useEffect(() => {
     if (!loaded.current) {
@@ -20,15 +20,15 @@ export default function ParticleBackground() {
     }
   }, []);
 
-  /* 2. tema via contexto */
+  /* 2. theme via context */
   const { applied } = useTheme();
   const isDark = applied === "dark";
 
-  /* 4. opções — SEM fullScreen  */
+  /* 4. options — WITHOUT fullScreen  */
   const options = useMemo<ISourceOptions>(() => {
     const color = isDark ? "#ffffff" : "#0f172a";
     return {
-      /* fullScreen desativado: o canvas ocupa só o contêiner */
+      /* fullScreen disabled: the canvas fills only the container */
       fullScreen: { enable: false },
       fpsLimit: 60,
       particles: {
@@ -59,7 +59,7 @@ export default function ParticleBackground() {
     };
   }, [isDark]);
 
-  /* 5. canvas limitado ao container (100 % área da Home) */
+  /* 5. canvas limited to the container (100% of the Home area) */
   return (
     <div className="absolute inset-0 -z-10 h-full w-full">
       <Particles

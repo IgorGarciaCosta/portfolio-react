@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { SiArtstation } from "react-icons/si";
 
-/* ---------- links & ícones ---------- */
+/* ---------- links & icons ---------- */
 type ContactLink = {
   label: string;
   url: string;
@@ -37,7 +37,7 @@ const CONTACT_LINKS: ContactLink[] = [
   },
 ];
 
-/* ---------- tipo do formulário ---------- */
+/* ---------- form type ---------- */
 type FormState = { name: string; email: string; message: string };
 
 export default function Contact() {
@@ -78,7 +78,7 @@ export default function Contact() {
     }
   };
 
-  /* ------- parâmetros da animação ------- */
+  /* ------- animation parameters ------- */
   const bounce = { y: [0, -36, 0] };
   const bounceDuration = 0.5;
   const stagger = 0.3;
@@ -94,7 +94,7 @@ export default function Contact() {
       className="mx-auto flex min-h-[calc(100vh-6rem)] items-center px-4"
     >
       <div className="mx-auto w-full max-w-5xl md:grid md:grid-cols-2 md:gap-12">
-        {/* -------- coluna esquerda -------- */}
+        {/* -------- left column -------- */}
         <div className="mb-12 flex flex-col items-center gap-8 text-center md:mb-0 md:items-start md:text-left">
           <header className="space-y-4">
             <h1 className="text-3xl font-extrabold">Let's Connect!</h1>
@@ -104,7 +104,7 @@ export default function Contact() {
             </p>
           </header>
 
-          {/* -------- ícones com animação -------- */}
+          {/* -------- animated icons -------- */}
           <ul className="flex gap-6">
             {CONTACT_LINKS.map((l, idx) => (
               <motion.li key={l.label}>
@@ -134,7 +134,7 @@ export default function Contact() {
           </ul>
         </div>
 
-        {/* -------- coluna direita (card) -------- */}
+        {/* -------- right column (card) -------- */}
         <div className="mx-auto w-full max-w-lg">
           <div className="rounded-lg bg-gray-100 p-6 text-gray-900 dark:bg-gray-800/80 dark:text-gray-100">
             {sent ? (

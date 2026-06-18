@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 interface Props {
   text: string;
-  speed?: number; // ms entre caracteres (padrão 100 ms)
+  speed?: number; // ms between characters (default 100ms)
   className?: string;
 }
 
@@ -14,7 +14,7 @@ export default function TypewriterText({
   const [visible, setVisible] = useState(0);
   const finished = visible >= text.length;
 
-  /* animação de digitação */
+  /* typing animation */
   useEffect(() => {
     setVisible(0);
     const id = setInterval(() => {
@@ -32,7 +32,7 @@ export default function TypewriterText({
   return (
     <span className={`font-mono whitespace-pre ${className}`}>
       {text.slice(0, visible)}
-      {/* cursor proporcional à fonte */}
+      {/* cursor proportional to the font */}
       <span
         className={`inline-block h-[1em] w-0.5 align-baseline bg-current ${
           finished ? "animate-caret" : ""

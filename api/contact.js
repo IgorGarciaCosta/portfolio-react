@@ -1,8 +1,8 @@
 // api/contact.js
 import nodemailer from 'nodemailer';
 
-// ── Rate-limiting em memória (por IP, janela de 15 min) ──────────────
-const WINDOW_MS = 15 * 60 * 1000; // 15 minutos
+// ── In-memory rate limiting (per IP, 15-min window) ──────────────
+const WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 const MAX_REQUESTS = 5;
 const hits = new Map(); // Map<ip, { count, resetAt }>
 
@@ -19,11 +19,11 @@ function isRateLimited(ip) {
   return entry.count > MAX_REQUESTS;
 }
 
-// ── Validação ────────────────────────────────────────────────────────
+// ── Validation ────────────────────────────────────────────────────────
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function sanitizeHeader(value) {
-  // Remove \r e \n para impedir header injection
+  // Remove \r and \n to prevent header injection
   return String(value).replace(/[\r\n]/g, '').trim();
 }
 
@@ -42,14 +42,14 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Too many requests. Try again later.' });
   }
 
-  // ── Campos obrigatórios ──────────────────────────────────────────
+  // ── Required fields ──────────────────────────────────────────
   const { name, email, message } = req.body || {};
 
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Missing fields' });
   }
 
-  // ── Validação de formato e tamanho ───────────────────────────────
+  // ── Format and length validation ───────────────────────────────
   if (typeof name !== 'string' || name.length > 100) {
     return res.status(400).json({ error: 'Invalid name' });
   }
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Message too long' });
   }
 
-  // ── Sanitização ──────────────────────────────────────────────────
+  // ── Sanitization ──────────────────────────────────────────────────
   const safeName = sanitizeHeader(name);
   const safeEmail = sanitizeHeader(email);
 

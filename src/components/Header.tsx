@@ -1,4 +1,4 @@
-// Header “one-page” — destaca botão ativo e faz scroll suave
+// Header “one-page” — highlights the active button and smooth-scrolls
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export function Header({ current, onNav }: Props) {
-  /* sombra / cor de fundo ao rolar */
+  /* shadow / background color on scroll */
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10);
@@ -17,17 +17,17 @@ export function Header({ current, onNav }: Props) {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  /* -------- classe dos itens de navegação -------- */
+  /* -------- nav item classes -------- */
   const navClasses = (key: Props["current"]) =>
     [
       "cursor-pointer select-none px-2 pb-1 font-medium transition-colors",
-      "border-b-2", // traço na base
+      "border-b-2", // bottom border
       current === key
-        ? "border-blue-600 text-blue-900 dark:text-white" // ativo
+        ? "border-blue-600 text-blue-900 dark:text-white" // active
         : "border-transparent hover:border-blue-600 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400",
     ].join(" ");
 
-  /* -------- classe do header -------- */
+  /* -------- header classes -------- */
   const headerClasses = [
     "fixed inset-x-0 top-0 z-50 border-b-2 backdrop-blur-md transition-colors",
     scrolled

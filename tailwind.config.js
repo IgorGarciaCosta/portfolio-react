@@ -3,7 +3,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: "class",          // permite tema escuro por classe
+  darkMode: "class",          // enables dark theme via class
   theme: { extend: {
     keyframes: {
         caret: {

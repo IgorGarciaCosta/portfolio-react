@@ -9,12 +9,12 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),  // agora você pode importar usando "@/..."
+      '@': path.resolve(__dirname, 'src'),  // now you can import using "@/..."
     },
   },
   /* server: {
     proxy: {
-      '/api': 'http://localhost:8787', // Proxy para o backend local
+      '/api': 'http://localhost:8787', // Proxy to the local backend
     },
   },   */
 });

@@ -18,12 +18,12 @@ export default function Projects() {
 
   return (
     <section id="projects" className="mx-auto max-w-6xl space-y-10 px-4">
-      {/* ----------- título ----------- */}
+      {/* ----------- title ----------- */}
       <h2 className="mb-8 pl-4 text-center text-3xl font-bold sm:pl-0 sm:text-left sm:text-4xl">
         Highlight Projects
       </h2>
 
-      {/* ----------- filtro ----------- */}
+      {/* ----------- filter ----------- */}
       <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
         {ALL_TAGS.map((tag) => (
           <button
@@ -42,7 +42,7 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* ----------- grid animado ----------- */}
+      {/* ----------- animated grid ----------- */}
       <motion.div
         layout
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"

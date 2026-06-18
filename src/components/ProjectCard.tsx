@@ -9,7 +9,7 @@ import {
   FaTelegram,
 } from "react-icons/fa";
 
-/* gera URL de thumbnail do YouTube (sempre existe a hqdefault) */
+/* builds the YouTube thumbnail URL (hqdefault always exists) */
 function ytThumb(embed: string) {
   const id = embed.split("/embed/")[1]?.split("?")[0] ?? "";
   return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;

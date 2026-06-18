@@ -32,9 +32,9 @@ export const PROJECTS: Project[] = [
     tags: ["Unreal / C++"],
   },
   {
-    title: "Laser launcher robot",
+    title: "Laser Launcher Robot",
     description:
-      "Full-pipeline solo project: modeled, rigged, animated and programmed a laser-firing robot entirely from scratch in UE5. Showcases mastery of Niagara particle FX, Lumen global illumination and Nanite virtualized geometry in a single production-quality scene.",
+      "Solo end-to-end project: modeled, rigged, animated and programmed a laser-firing robot from scratch in UE5. Built with Niagara particle FX, Lumen global illumination and Nanite virtualized geometry in a single scene.",
     videoSrc: "https://www.youtube.com/embed/Qf3frW3jAWk",
     tags: ["Unreal / C++"],
     links: [
@@ -46,9 +46,9 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "Skateboarding prototype",
+    title: "Skateboarding Prototype",
     description:
-      "Rapid-prototype built in 48 hours — demonstrates the ability to deliver a polished, playable game loop under tight deadlines. Features fluid movement, trick system, score tracking and full gamepad/keyboard input parity.",
+      "Prototype built in 48 hours. Features fluid movement, a trick system, score tracking and full gamepad/keyboard input parity.",
     videoSrc: "https://www.youtube.com/embed/CL3kiYauUl0",
     tags: ["Unreal / C++"],
     links: [
@@ -60,9 +60,9 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "Realtime mesh Exporter",
+    title: "Realtime Mesh Exporter",
     description:
-      "Fills a genuine market gap: the first publicly available UE tool capable of exporting fully skinned meshes at runtime. Published and sold on the official FAB marketplace, proving real-world production value and demand.",
+      "A UE tool for exporting fully skinned meshes at runtime — an uncommon capability in the engine's ecosystem. Published on the official FAB marketplace.",
     videoSrc: "https://www.youtube.com/embed/rJmea9DGjjo",
     tags: ["Unreal / C++", "Tools"],
   },
@@ -95,9 +95,9 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "OpenAI UE5 integration Plugin",
+    title: "OpenAI UE5 Integration Plugin",
     description:
-      "Editor plugin that embeds OpenAI's text, image and code-generation APIs directly inside Unreal Engine, turning the IDE into a unified AI-powered workspace and cutting context-switching time for the entire team.",
+      "Editor plugin that embeds OpenAI's text, image and code-generation APIs directly inside Unreal Engine, reducing context-switching during development.",
     videoSrc: "https://www.youtube.com/embed/SM36E1veQto",
     tags: ["Unreal / C++", "Tools"],
     links: [
@@ -123,9 +123,9 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "Unused plugins handler",
+    title: "Unused Plugins Handler",
     description:
-      "Born out of a real team pain point: a C++ editor plugin that audits, disables and manages unused UE plugins automatically — reducing compile times and keeping large projects lean without manual intervention.",
+      "C++ editor plugin that audits, disables and manages unused UE plugins automatically — reducing compile times and keeping large projects lean without manual intervention.",
     videoSrc: "https://www.youtube.com/embed/KsBKdIevOns",
     tags: ["Unreal / C++", "Tools"],
     links: [
@@ -137,9 +137,9 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "VR bedroom simulation",
+    title: "VR Bedroom Simulation",
     description:
-      "Immersive XR experience built in UE5.5 for the Vive XR Elite — features physically interactive objects and cinematic lighting that demonstrate hands-on expertise with the full VR development pipeline.",
+      "XR experience built in UE5.5 for the Vive XR Elite — features physically interactive objects and cinematic lighting, covering the full VR development pipeline.",
     videoSrc: "https://www.youtube.com/embed/VUssMq4qAyk",
     tags: ["VR", "Unreal / C++"],
     links: [
@@ -151,9 +151,9 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "Platform 2D game",
+    title: "Platform 2D Game",
     description:
-      "Weekend challenge that produced a complete 2D platformer in UE: fluid character movement, enemy AI, collectibles and a lives/score system — all built with Paper 2D and Flipbooks, proving fast iteration from zero to shippable.",
+      "Weekend project: a complete 2D platformer in UE with fluid character movement, enemy AI, collectibles and a lives/score system — built with Paper 2D and Flipbooks.",
     videoSrc: "https://www.youtube.com/embed/HTJ7bF0yzVs",
     tags: ["Unreal / C++"],
     links: [
@@ -184,7 +184,7 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "Cripto Checker",
+    title: "Crypto Checker",
     description:
       "Full-stack React web app that monitors live crypto prices and fires personalised email alerts the moment user-defined thresholds are crossed — combining real-time API integration with a clean, responsive UI.",
     videoSrc: "https://www.youtube.com/embed/Tb5DNL9x4HQ",

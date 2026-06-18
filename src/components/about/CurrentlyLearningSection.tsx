@@ -8,7 +8,7 @@ import {
 export default function CurrentlyLearningSection() {
   return (
     <div className="space-y-6">
-      {/* título com dot pulsante */}
+      {/* title with pulsing dot */}
       <div className="flex items-center gap-3">
         <span className="relative flex h-3 w-3">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />

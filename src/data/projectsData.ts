@@ -11,6 +11,13 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    title: "VRED MCP Server",
+    description:
+      "Model Context Protocol (MCP) server that lets AI assistants drive Autodesk VRED. Built in Python, it exposes tools for scene management (open, save, hierarchy, show/hide objects), materials (create, apply, color & roughness), rendering (screenshots, quality, resolution, cameras), animations and variant sets — plus arbitrary Python execution inside VRED's interpreter via its Web Interface API.",
+    videoSrc: "https://www.youtube.com/embed/37ELJt1IeyM",
+    tags: ["Tools", "Backend"],
+  },
+  {
     title: "Interactive Totem — Selfie with Lis",
     description:
       "Interactive AI avatar totem developed at Estúdio Cafundó. Programmed in C#, the installation lets visitors interact with a real-time AI-driven character — blending generative AI and a custom kiosk interface into a seamless public experience.",

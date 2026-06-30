@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import profileImg from "@/assets/profile.png";
+import profileImg from "@/assets/profile.jpg";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 import SkillSection from "@/components/about/SkillSection";
 import CurrentlyLearningSection from "@/components/about/CurrentlyLearningSection";

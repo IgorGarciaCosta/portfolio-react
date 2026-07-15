@@ -4,10 +4,10 @@ Personal portfolio built with React, TypeScript, and Vite showcasing my work as 
 
 ## Features
 
-- **Single-page scroll layout** with smooth navigation and scroll-aware sticky header
+- **Single-page scroll layout** with smooth navigation, scroll-aware sticky header, and progress indicator
 - **Interactive particle background** (tsParticles) with hover/click interactions
 - **Typewriter text animation** on the hero section
-- **3-card project carousel** with Framer Motion transitions and embedded YouTube videos (12 projects)
+- **Filterable responsive project grid** with Framer Motion transitions, embedded YouTube videos, and image carousels
 - **AI chatbot** powered by Google Gemini with CV-aware context
 - **Dark / Light / System theme** toggle with localStorage persistence and OS preference detection
 - **Git-graph experience timeline** with SVG branch/merge lines, color-coded lanes, and animated dots

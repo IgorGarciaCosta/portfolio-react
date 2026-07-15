@@ -6,7 +6,6 @@ export type Applied = "light" | "dark";
 export interface ThemeContextValue {
   theme: Theme;
   applied: Applied;
-  setTheme: (t: Theme) => void;
   toggle: () => void;
 }
 

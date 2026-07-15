@@ -47,6 +47,12 @@ npm run build
 npm run preview
 ```
 
+The optional resume and document utilities under `scripts/` require Python 3.10+:
+
+```bash
+pip install -r scripts/requirements.txt
+```
+
 ## Environment Variables
 
 Set these on your Vercel dashboard:
@@ -70,6 +76,7 @@ src/
 api/
 ├── chat.js         # Vercel serverless function for AI chatbot (Gemini)
 └── contact.js      # Vercel serverless function for email
+scripts/            # Optional resume, cover-letter, PDF, and spreadsheet utilities
 ```
 
 ## Deployment

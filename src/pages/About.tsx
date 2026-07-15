@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import profileImg from "@/assets/profile.jpg";
+import profileImg from "@/assets/profile.webp";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 import SkillSection from "@/components/about/SkillSection";
 import CurrentlyLearningSection from "@/components/about/CurrentlyLearningSection";
@@ -13,8 +13,8 @@ export default function About() {
   const summary = (
     <div className="space-y-4 text-justify leading-7">
       <p>
-        I’m <strong>Igor Garcia</strong>, a Software Engineer with 4+ years
-        of experience building high-performance internal tooling, automated
+        I’m <strong>Igor Garcia</strong>, a Software Engineer with 4+ years of
+        experience building high-performance internal tooling, automated
         workflows, and network-aware applications. Strong background in{" "}
         <strong>C++</strong> and <strong>C#</strong>, with a proven track record
         of optimizing complex systems and reducing manual operations for
@@ -35,12 +35,12 @@ export default function About() {
 
       <p>
         Deeply passionate about systems engineering, backend architecture, and
-        cloud infrastructure. Currently leveraging{" "}
-        <strong>AWS</strong> services to build scalable, automated solutions,
-        with hands-on experience in containerized deployments (
-        <strong>Docker</strong>) and CI/CD automation. Also expanding into
-        backend engineering with <strong>C# / ASP.NET</strong>, designing APIs
-        and production-minded services.
+        cloud infrastructure. Currently leveraging <strong>AWS</strong> services
+        to build scalable, automated solutions, with hands-on experience in
+        containerized deployments (<strong>Docker</strong>) and CI/CD
+        automation. Also expanding into backend engineering with{" "}
+        <strong>C# / ASP.NET</strong>, designing APIs and production-minded
+        services.
       </p>
 
       <p>

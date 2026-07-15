@@ -1,5 +1,5 @@
 /* --------------------- pages/Projects.tsx --------------------- */
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ProjectCard } from "@/components/ProjectCard";
 import type { Tag } from "@/components/ProjectCard";
@@ -8,16 +8,13 @@ import { PROJECTS, ALL_TAGS } from "@/data/projectsData";
 export default function Projects() {
   const [activeTag, setActiveTag] = useState<Tag | "All">("All");
 
-  const filtered = useMemo(
-    () =>
-      activeTag === "All"
-        ? PROJECTS
-        : PROJECTS.filter((p) => p.tags.includes(activeTag)),
-    [activeTag],
-  );
+  const filtered =
+    activeTag === "All"
+      ? PROJECTS
+      : PROJECTS.filter((project) => project.tags.includes(activeTag));
 
   return (
-    <section id="projects" className="mx-auto max-w-6xl space-y-10 px-4">
+    <div className="mx-auto max-w-6xl space-y-10 px-4">
       {/* ----------- title ----------- */}
       <h2 className="mb-8 pl-4 text-center text-3xl font-bold sm:pl-0 sm:text-left sm:text-4xl">
         Highlight Projects
@@ -62,6 +59,6 @@ export default function Projects() {
           ))}
         </AnimatePresence>
       </motion.div>
-    </section>
+    </div>
   );
 }

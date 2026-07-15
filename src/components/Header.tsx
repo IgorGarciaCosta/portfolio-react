@@ -4,10 +4,11 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 type Props = {
   current: "home" | "about" | "projects" | "contact";
-  onNav: (key: Props["current"]) => void;
 };
 
-export function Header({ current, onNav }: Props) {
+const NAV_ITEMS = ["about", "projects", "contact"] as const;
+
+export function Header({ current }: Props) {
   /* shadow / background color on scroll */
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -42,9 +43,8 @@ export function Header({ current, onNav }: Props) {
         className="relative flex w-full items-center px-6 py-4"
       >
         {/* ---------------- brand ---------------- */}
-        <button
-          type="button"
-          onClick={() => onNav("home")}
+        <a
+          href="#home"
           className="absolute left-6 flex cursor-pointer items-center bg-transparent border-none p-0"
           aria-label="Igor Garcia — Home"
         >
@@ -71,37 +71,17 @@ export function Header({ current, onNav }: Props) {
               IG
             </text>
           </svg>
-        </button>
+        </a>
 
         {/* ---------------- menu ---------------- */}
         <ul className="mx-auto flex gap-6">
-          <li>
-            <button
-              type="button"
-              className={navClasses("about")}
-              onClick={() => onNav("about")}
-            >
-              About
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className={navClasses("projects")}
-              onClick={() => onNav("projects")}
-            >
-              Projects
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className={navClasses("contact")}
-              onClick={() => onNav("contact")}
-            >
-              Contact
-            </button>
-          </li>
+          {NAV_ITEMS.map((item) => (
+            <li key={item}>
+              <a href={`#${item}`} className={navClasses(item)}>
+                {item[0].toUpperCase() + item.slice(1)}
+              </a>
+            </li>
+          ))}
         </ul>
 
         {/* ---------------- theme switch ---------------- */}

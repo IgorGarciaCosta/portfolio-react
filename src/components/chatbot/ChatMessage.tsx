@@ -1,12 +1,11 @@
 import Markdown from "react-markdown";
-import type { Message, ChatPalette } from "./types";
+import type { Message } from "./types";
 
 interface ChatMessageProps {
   message: Message;
-  palette: ChatPalette;
 }
 
-export function ChatMessage({ message, palette }: ChatMessageProps) {
+export function ChatMessage({ message }: ChatMessageProps) {
   const isUser = message.role === "user";
 
   return (
@@ -17,7 +16,9 @@ export function ChatMessage({ message, palette }: ChatMessageProps) {
     >
       <div
         className={`max-w-[80%] rounded-2xl px-3 py-2 ${
-          isUser ? palette.userBubble : palette.bubble
+          isUser
+            ? "bg-blue-600 text-white"
+            : "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100"
         }`}
       >
         {!isUser ? (
@@ -46,7 +47,7 @@ export function ChatMessage({ message, palette }: ChatMessageProps) {
           <span className="whitespace-pre-wrap">{message.text}</span>
         )}
       </div>
-      <span className={`mt-0.5 text-[10px] ${palette.timestamp}`}>
+      <span className="mt-0.5 text-[10px] text-gray-400 dark:text-gray-500">
         {message.time}
       </span>
     </div>

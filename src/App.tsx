@@ -1,5 +1,5 @@
 /* --------------------------- src/App.tsx --------------------------- */
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
@@ -15,21 +15,7 @@ const Chatbot = lazy(() =>
 );
 
 type SectionKey = "home" | "about" | "projects" | "contact";
-type SectionRefs = { [K in SectionKey]: React.RefObject<HTMLElement | null> };
-
 export default function App() {
-  const homeRef = useRef<HTMLElement>(null);
-  const aboutRef = useRef<HTMLElement>(null);
-  const projectsRef = useRef<HTMLElement>(null);
-  const contactRef = useRef<HTMLElement>(null);
-
-  const refs: SectionRefs = {
-    home: homeRef,
-    about: aboutRef,
-    projects: projectsRef,
-    contact: contactRef,
-  };
-
   const [current, setCurrent] = useState<SectionKey>("home");
 
   /* IntersectionObserver that tracks the current section ------------------ */
@@ -45,15 +31,11 @@ export default function App() {
       { rootMargin: "-40% 0% -40% 0%", threshold: [0, 0.4, 0.6, 1] },
     );
 
-    Object.values(refs).forEach(
-      (r) => r.current && observer.observe(r.current),
-    );
+    document
+      .querySelectorAll<HTMLElement>("[data-section]")
+      .forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const scrollTo = (key: SectionKey) =>
-    refs[key].current?.scrollIntoView({ behavior: "smooth" });
 
   /* ----------------------------- layout --------------------------- */
   return (
@@ -66,7 +48,7 @@ export default function App() {
       </a>
 
       <ScrollProgress />
-      <Header current={current} onNav={scrollTo} />
+      <Header current={current} />
 
       <main
         id="main-content"
@@ -74,7 +56,7 @@ export default function App() {
         className="flex-1 pt-24 outline-none"
       >
         {/* ---------- Home (no dots) ---------- */}
-        <section ref={refs.home} data-section="home" id="home">
+        <section data-section="home" id="home">
           <Home />
         </section>
 
@@ -86,24 +68,19 @@ export default function App() {
             flex flex-col space-y-32 md:space-y-48
           "
         >
-          <section
-            ref={refs.about}
-            data-section="about"
-            id="about"
-            className="pt-32 md:pt-48"
-          >
+          <section data-section="about" id="about" className="pt-32 md:pt-48">
             <Suspense fallback={<div className="min-h-[50vh]" />}>
               <About />
             </Suspense>
           </section>
 
-          <section ref={refs.projects} data-section="projects" id="projects">
+          <section data-section="projects" id="projects">
             <Suspense fallback={<div className="min-h-[50vh]" />}>
               <Projects />
             </Suspense>
           </section>
 
-          <section ref={refs.contact} data-section="contact" id="contact">
+          <section data-section="contact" id="contact">
             <Suspense fallback={<div className="min-h-[50vh]" />}>
               <Contact />
             </Suspense>

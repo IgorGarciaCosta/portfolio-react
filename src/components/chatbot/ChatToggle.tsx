@@ -1,21 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
-import type { ChatPalette } from "./types";
 
 interface ChatToggleProps {
   isOpen: boolean;
   onOpen: () => void;
-  isDark: boolean;
-  palette: ChatPalette;
 }
 
-export function ChatToggle({
-  isOpen,
-  onOpen,
-  isDark,
-  palette,
-}: ChatToggleProps) {
+export function ChatToggle({ isOpen, onOpen }: ChatToggleProps) {
   const [showGreeting, setShowGreeting] = useState(false);
 
   /* proactive greeting bubble (once per session) */
@@ -53,9 +45,7 @@ export function ChatToggle({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             onClick={handleOpen}
-            className={`fixed bottom-20 left-6 z-50 max-w-[220px] cursor-pointer rounded-xl px-3 py-2 text-xs
-                        ${isDark ? "bg-gray-800 text-gray-200" : "bg-white text-gray-800"}
-                        shadow-lg ${palette.border} border`}
+            className="fixed bottom-20 left-6 z-50 max-w-[220px] cursor-pointer rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs text-gray-800 shadow-lg dark:border-gray-800 dark:bg-gray-800 dark:text-gray-200"
           >
             👋 Hey! Want to know about Igor's work?
           </motion.div>

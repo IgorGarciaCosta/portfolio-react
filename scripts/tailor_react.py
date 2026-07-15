@@ -10,7 +10,7 @@ Emphasis: TypeScript/JavaScript, reusable component UI, REST API integration,
 AWS (EKS) deployments and CI/CD pipelines, agile international teams.
 """
 from docx import Document
-from docx.oxml.ns import qn
+from docx_utils import apply_substring, replace_resume_subtitle, set_paragraph_text
 
 INPUT = r"C:\Users\ISILV125\Downloads\05_Pessoal\Curriculum\CurriculumRelated\IgorGarcia_Software_Development_Engineer.docx"
 OUTPUT = r"C:\Users\ISILV125\Downloads\05_Pessoal\Curriculum\CurriculumRelated\IgorGarcia_Software_Development_Engineer-FrontEnd-Angular.docx"
@@ -70,55 +70,13 @@ substring_replacements = {
 }
 
 
-def set_paragraph_text(para, new_text):
-    """Replace full paragraph text, keeping the first run's formatting."""
-    if para.runs:
-        para.runs[0].text = new_text
-        for r in para.runs[1:]:
-            r.text = ""
-    else:
-        para.add_run(new_text)
-
-
-def apply_substring(para, old, new):
-    """Replace a substring inside the run that contains it."""
-    for run in para.runs:
-        if old in run.text:
-            run.text = run.text.replace(old, new)
-            return True
-    # Fall back: collapse into first run if split across runs
-    if old in para.text and para.runs:
-        combined = para.text.replace(old, new)
-        para.runs[0].text = combined
-        for r in para.runs[1:]:
-            r.text = ""
-        return True
-    return False
-
-
 # Apply paragraph + subtitle replacements
 for para in doc.paragraphs:
     text = para.text.strip()
 
     # Subtitle line (has email + LINKS)
     if "Software Engineer" in text and "EU Citizen" in text and "igonildo7" in text:
-        if para.runs:
-            para.runs[0].text = subtitle_new
-            # Preserve the "\n\nLINKS" tail that lives in later runs
-            if len(para.runs) >= 5:
-                para.runs[4].text = "\n"
-            if len(para.runs) >= 6:
-                para.runs[5].text = "\n"
-            if len(para.runs) >= 7:
-                para.runs[6].text = "LINKS"
-            for i, run in enumerate(para.runs[1:], start=1):
-                if i not in (4, 5, 6):
-                    run.text = ""
-        for hl in para._element.findall(qn('w:hyperlink')):
-            for r in hl.findall(qn('w:r')):
-                t = r.find(qn('w:t'))
-                if t is not None:
-                    t.text = ""
+        replace_resume_subtitle(para, subtitle_new)
         continue
 
     matched = False
@@ -169,9 +127,11 @@ for table in doc.tables:
                 "SOLID, Unit Testing",
             ]
             for pi, para in enumerate(cells[0].paragraphs):
-                set_paragraph_text(para, labels[pi] if pi < len(labels) else "")
+                set_paragraph_text(
+                    para, labels[pi] if pi < len(labels) else "")
             for pi, para in enumerate(cells[1].paragraphs):
-                set_paragraph_text(para, values[pi] if pi < len(values) else "")
+                set_paragraph_text(
+                    para, values[pi] if pi < len(values) else "")
 
 
 doc.save(OUTPUT)

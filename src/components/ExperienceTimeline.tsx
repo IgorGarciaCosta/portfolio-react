@@ -178,6 +178,32 @@ function EntryCard({ exp }: { exp: Experience }) {
   );
 }
 
+function TimelineEntry({
+  exp,
+  lanes,
+  dotX,
+  dotColor,
+}: {
+  exp: Experience;
+  lanes: { x: number; color: string; startAtDot?: boolean }[];
+  dotX: number;
+  dotColor: string;
+}) {
+  return (
+    <div className="flex items-stretch gap-3">
+      <div className="relative shrink-0" style={{ width: GW }}>
+        {lanes.map((lane) => (
+          <Lane key={lane.x} {...lane} />
+        ))}
+        <Dot x={dotX} color={dotColor} />
+      </div>
+      <div className="flex-1 py-1">
+        <EntryCard exp={exp} />
+      </div>
+    </div>
+  );
+}
+
 /* ----------------------------- main component --------------------------- */
 export default function ExperienceTimeline() {
   const CH = 48;
@@ -186,15 +212,12 @@ export default function ExperienceTimeline() {
   return (
     <div className="flex flex-col">
       {/* ─── Entry 0: VR Researcher ─── */}
-      <div className="flex items-stretch gap-3">
-        <div className="relative shrink-0" style={{ width: GW }}>
-          <Lane x={L0} color={palette.main} startAtDot />
-          <Dot x={L0} color={palette.vr} />
-        </div>
-        <div className="flex-1 py-1">
-          <EntryCard exp={experiences[0]} />
-        </div>
-      </div>
+      <TimelineEntry
+        exp={experiences[0]}
+        lanes={[{ x: L0, color: palette.main, startAtDot: true }]}
+        dotX={L0}
+        dotColor={palette.vr}
+      />
 
       {/* Connector 0 → 1 */}
       <div>
@@ -211,15 +234,12 @@ export default function ExperienceTimeline() {
       </div>
 
       {/* ─── Entry 1: Ford SE ─── */}
-      <div className="flex items-stretch gap-3">
-        <div className="relative shrink-0" style={{ width: GW }}>
-          <Lane x={L0} color={palette.main} />
-          <Dot x={L0} color={palette.main} />
-        </div>
-        <div className="flex-1 py-1">
-          <EntryCard exp={experiences[1]} />
-        </div>
-      </div>
+      <TimelineEntry
+        exp={experiences[1]}
+        lanes={[{ x: L0, color: palette.main }]}
+        dotX={L0}
+        dotColor={palette.main}
+      />
 
       {/* Connector 1 → 2: fork to Blue Gravity */}
       <div>
@@ -242,16 +262,15 @@ export default function ExperienceTimeline() {
       </div>
 
       {/* ─── Entry 2: Blue Gravity ─── */}
-      <div className="flex items-stretch gap-3">
-        <div className="relative shrink-0" style={{ width: GW }}>
-          <Lane x={L0} color={palette.main} />
-          <Lane x={L1} color={palette.bg} />
-          <Dot x={L1} color={palette.bg} />
-        </div>
-        <div className="flex-1 py-1">
-          <EntryCard exp={experiences[2]} />
-        </div>
-      </div>
+      <TimelineEntry
+        exp={experiences[2]}
+        lanes={[
+          { x: L0, color: palette.main },
+          { x: L1, color: palette.bg },
+        ]}
+        dotX={L1}
+        dotColor={palette.bg}
+      />
 
       {/* Connector 2 → 3: merge BG back + fork to Cafundó */}
       <div>
@@ -280,16 +299,15 @@ export default function ExperienceTimeline() {
       </div>
 
       {/* ─── Entry 3: Cafundó ─── */}
-      <div className="flex items-stretch gap-3">
-        <div className="relative shrink-0" style={{ width: GW }}>
-          <Lane x={L0} color={palette.main} />
-          <Lane x={L1} color={palette.cf} />
-          <Dot x={L1} color={palette.cf} />
-        </div>
-        <div className="flex-1 py-1">
-          <EntryCard exp={experiences[3]} />
-        </div>
-      </div>
+      <TimelineEntry
+        exp={experiences[3]}
+        lanes={[
+          { x: L0, color: palette.main },
+          { x: L1, color: palette.cf },
+        ]}
+        dotX={L1}
+        dotColor={palette.cf}
+      />
 
       {/* Tail: both lanes fade out */}
       <div>

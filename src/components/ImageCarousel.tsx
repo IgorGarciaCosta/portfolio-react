@@ -14,6 +14,37 @@ const variants = {
   exit: (dir: number) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 0 }),
 };
 
+function useCarousel(length: number, startIndex = 0) {
+  const [[page, direction], setPage] = useState<[number, number]>([
+    startIndex,
+    0,
+  ]);
+
+  const paginate = useCallback(
+    (dir: number) =>
+      setPage(([previous]) => [(previous + dir + length) % length, dir]),
+    [length],
+  );
+
+  const goTo = useCallback(
+    (index: number) =>
+      setPage(([previous]) => [index, index > previous ? 1 : -1]),
+    [],
+  );
+
+  return { page, direction, paginate, goTo };
+}
+
+function swipe(
+  offset: number,
+  velocity: number,
+  paginate: (direction: number) => void,
+) {
+  if (Math.abs(offset) > 50 || Math.abs(velocity) > 500) {
+    paginate(offset < 0 ? 1 : -1);
+  }
+}
+
 /* -------- lightbox (portal) -------- */
 function Lightbox({
   images,
@@ -26,15 +57,9 @@ function Lightbox({
   startIndex: number;
   onClose: () => void;
 }) {
-  const [[page, direction], setPage] = useState([startIndex, 0]);
-
-  const paginate = useCallback(
-    (dir: number) =>
-      setPage(([prev]) => {
-        const next = (prev + dir + images.length) % images.length;
-        return [next, dir];
-      }),
-    [images.length],
+  const { page, direction, paginate, goTo } = useCarousel(
+    images.length,
+    startIndex,
   );
 
   useEffect(() => {
@@ -88,7 +113,12 @@ function Lightbox({
             animate="center"
             exit="exit"
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            draggable={false}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(_, { offset, velocity }) =>
+              swipe(offset.x, velocity.x, paginate)
+            }
             className="absolute max-h-full max-w-full object-contain"
           />
         </AnimatePresence>
@@ -120,7 +150,7 @@ function Lightbox({
                 <button
                   key={i}
                   type="button"
-                  onClick={() => setPage([i, i > page ? 1 : -1])}
+                  onClick={() => goTo(i)}
                   aria-label={`Go to image ${i + 1}`}
                   className={`h-2.5 w-2.5 rounded-full transition-colors ${
                     i === page ? "bg-white" : "bg-white/50 hover:bg-white/75"
@@ -138,17 +168,8 @@ function Lightbox({
 
 /* -------- inline carousel -------- */
 export function ImageCarousel({ images, alt }: Props) {
-  const [[page, direction], setPage] = useState([0, 0]);
+  const { page, direction, paginate, goTo } = useCarousel(images.length);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-
-  const paginate = useCallback(
-    (dir: number) =>
-      setPage(([prev]) => {
-        const next = (prev + dir + images.length) % images.length;
-        return [next, dir];
-      }),
-    [images.length],
-  );
 
   return (
     <>
@@ -164,7 +185,12 @@ export function ImageCarousel({ images, alt }: Props) {
             animate="center"
             exit="exit"
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            draggable={false}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(_, { offset, velocity }) =>
+              swipe(offset.x, velocity.x, paginate)
+            }
             onClick={() => setLightboxOpen(true)}
             className="absolute inset-0 h-full w-full cursor-zoom-in object-contain"
           />
@@ -201,7 +227,7 @@ export function ImageCarousel({ images, alt }: Props) {
                 <button
                   key={i}
                   type="button"
-                  onClick={() => setPage([i, i > page ? 1 : -1])}
+                  onClick={() => goTo(i)}
                   aria-label={`Go to image ${i + 1}`}
                   className={`h-2 w-2 rounded-full transition-colors ${
                     i === page ? "bg-white" : "bg-white/50 hover:bg-white/75"

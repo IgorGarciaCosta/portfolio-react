@@ -1,11 +1,3 @@
-// api/chat.js
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const pdfParse = require('pdf-parse/lib/pdf-parse.js');
-
-/* ------------------------------------------------------------------ */
-/*  Hardcoded instructions (always present, regardless of PDF status)  */
-/* ------------------------------------------------------------------ */
 const INSTRUCTIONS = `You are the virtual assistant for Igor Garcia's portfolio website. Your role is to answer questions about Igor's career, skills, projects, and experience in a friendly and professional tone. Always answer in the same language the user writes in.
 
 ## Contact & Links
@@ -17,66 +9,34 @@ const INSTRUCTIONS = `You are the virtual assistant for Igor Garcia's portfolio 
 - If asked about something unrelated to Igor's career or portfolio, politely redirect the conversation.
 - Keep answers concise but informative.
 - You may suggest the user check specific sections of the portfolio or download Igor's CV for more details.
-- Base your answers primarily on the CV content provided below. If the CVs don't cover a topic, say you don't have that information.`;
+- Base your answers only on the portfolio context below. If it doesn't cover a topic, say you don't have that information.`;
 
-/* ------------------------------------------------------------------ */
-/*  Fallback prompt (used when PDF extraction fails)                   */
-/* ------------------------------------------------------------------ */
-const FALLBACK_CV = `## About Igor Garcia
-- Software Engineer / Computer Engineer with 4+ years of experience
-- Currently at Ford Motor Company — building virtual prototypes to cut physical mock-up costs and speed design decisions
-- Previously at Blue Gravity Studios — delivered multiplayer gameplay and responsive UI for SkateNation XL
+const PORTFOLIO_CONTEXT = `## Profile
+- Software Engineer and Computer Engineer with 4+ years of experience.
+- Strong background in C++, C#, Python, ASP.NET Core, React, TypeScript, backend architecture, real-time 3D, automation, and cloud infrastructure.
+- EU citizen open to remote work or relocation in Ireland, the UK, or the EU.
 
-## Technical Skills
-**Frontend**: JavaScript, TypeScript, React, Tailwind CSS, CSS3, HTML5
-**Backend**: C++, Python, Node.js
-**Tools**: Unreal Engine, GitHub, Git, Figma, Jira, NPM, Vite, Blender, Substance Painter 3D, ZBrush`;
+## Experience
+- Ford Motor Company — Software Engineer / C++ Developer (Jan 2023–Present): high-performance internal tooling, automated validation pipelines, Python/VRED automation, and React/TypeScript dashboards. Work contributed to approximately 40% annual material cost reduction and 50% faster design iteration.
+- Ford Motor Company — Virtual Reality Researcher (Aug 2021–Dec 2022): automotive VR R&D and virtual-prototyping workflows, improving assessment accuracy by 20%.
+- Blue Gravity Studios — Unreal Engine 5 / C++ Developer (Jan 2024–Sep 2024): multiplayer replication, network optimization, modular gameplay systems, and cross-platform input for SkateNation XL.
+- Cafundó Creative Studios — Software Engineer / C# (Jun 2025–Present): AI-powered Unity installation integrating Azure Cognitive Services and OpenAI, serving 500+ daily interactions.
 
-/* ------------------------------------------------------------------ */
-/*  PDF helpers + module-level cache                                   */
-/* ------------------------------------------------------------------ */
-const PDF_FILES = [
-  { label: 'Gameplay Engineer CV', file: 'IgorGarcia_Gameplay_Engineer.pdf' },
-  { label: 'Software Development Engineer CV', file: 'IgorGarcia_Software_Development_Engineer.pdf' },
-];
+## Skills
+- Frontend: JavaScript, TypeScript, React, Tailwind CSS, HTML, CSS.
+- Backend: C#, C++, Python, ASP.NET Core, Node.js, SQL, PostgreSQL, SQLite, Firebase, Docker.
+- Tools: Git, GitHub, GitHub Actions, Vite, Figma, Jira, Unreal Engine, Unity.
+- Currently learning: AWS and Oracle Cloud Infrastructure.
 
-let cachedPrompt = null;
+## Selected projects
+- VRED MCP Server: Python MCP server for controlling Autodesk VRED scenes, materials, rendering, animations, and variants.
+- Unreal Measurement Tool Plugin: Unreal Engine 5.7 editor plugin for measuring distances and areas; published on FAB.
+- Realtime Mesh Exporter: runtime skinned-mesh exporter for Unreal Engine; published on FAB.
+- Resume Matcher: ASP.NET Core 9, React 19, PostgreSQL, Docker, and Gemini application that matches resumes to jobs.
+- PSN Price Tracker: ASP.NET Core service and Telegram bot with scraping, alerts, SQLite, Swagger, rate limiting, and Docker.
+- Additional work includes SkateNation XL, Unreal/OpenAI integration, VR experiences, gameplay prototypes, editor tools, Crypto Checker, and a Blender mesh-cleaning add-on.`;
 
-function getBaseUrl() {
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return 'http://localhost:5173';
-}
-
-async function fetchPdfText(url) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`PDF fetch failed: ${res.status} ${url}`);
-  const arrayBuffer = await res.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-  const { text } = await pdfParse(buffer);
-  return text.trim();
-}
-
-async function getSystemPrompt() {
-  if (cachedPrompt) return cachedPrompt;
-
-  const base = getBaseUrl();
-
-  try {
-    const cvTexts = await Promise.all(
-      PDF_FILES.map(async ({ label, file }) => {
-        const text = await fetchPdfText(`${base}/${file}`);
-        return `## ${label}\n${text}`;
-      }),
-    );
-
-    cachedPrompt = `${INSTRUCTIONS}\n\n${cvTexts.join('\n\n')}`;
-  } catch (err) {
-    console.error('PDF extraction failed, using fallback:', err.message);
-    cachedPrompt = `${INSTRUCTIONS}\n\n${FALLBACK_CV}`;
-  }
-
-  return cachedPrompt;
-}
+const SYSTEM_PROMPT = `${INSTRUCTIONS}\n\n${PORTFOLIO_CONTEXT}`;
 
 /* ------------------------------------------------------------------ */
 /*  Handler                                                            */
@@ -91,8 +51,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing message' });
   }
 
-  const systemPrompt = await getSystemPrompt();
-
   // Build contents array for multi-turn conversation
   const contents = [
     ...(history || []),
@@ -106,7 +64,7 @@ export default async function handler(req, res) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          systemInstruction: { parts: [{ text: systemPrompt }] },
+          systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
           contents,
         }),
       },

@@ -1,6 +1,5 @@
 """Generates a brief cover letter DOCX for the Senior Unreal Engine Engineer (Switch) role."""
-from docx import Document
-from docx.shared import Pt
+from cover_letter_utils import save_cover_letter
 
 OUTPUT = r"C:\Users\ISILV125\Downloads\05_Pessoal\Curriculum\CurriculumRelated\IgorGarcia_CoverLetter-Unreal-Console.docx"
 
@@ -35,16 +34,4 @@ paragraphs = [
     "Igor Garcia",
 ]
 
-doc = Document()
-style = doc.styles["Normal"]
-style.font.name = "Calibri"
-style.font.size = Pt(11)
-
-for i, text in enumerate(paragraphs):
-    p = doc.add_paragraph(text)
-    if i == 0:
-        p.runs[0].bold = True
-        p.runs[0].font.size = Pt(14)
-
-doc.save(OUTPUT)
-print(f"Saved: {OUTPUT}")
+save_cover_letter(OUTPUT, paragraphs)

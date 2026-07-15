@@ -7,7 +7,7 @@ distributed systems / message queues (SQS), AWS, observability, CI/CD,
 with graphics/3D (CAD, Three.js/WebGL) and real-time collaboration as a plus.
 """
 from docx import Document
-from docx.oxml.ns import qn
+from docx_utils import replace_resume_subtitle, set_paragraph_text
 
 INPUT = r"C:\Users\ISILV125\Downloads\05_Pessoal\Curriculum\CurriculumRelated\IgorGarcia_Software_Development_Engineer.docx"
 OUTPUT = r"C:\Users\ISILV125\Downloads\05_Pessoal\Curriculum\CurriculumRelated\IgorGarcia_Software_Development_Engineer-Backend-CSharp.docx"
@@ -76,44 +76,23 @@ standalone_replacements = {
 }
 
 
-def replace_text_preserving_format(para, new_text):
-    """Clear all runs and set new text on the first run, preserving its format."""
-    if para.runs:
-        for run in para.runs:
-            run.text = ""
-        para.runs[0].text = new_text
-        return True
-    return False
-
-
 # Apply paragraph replacements
 for para in doc.paragraphs:
     text = para.text.strip()
 
     # Special handling for subtitle line
     if "Software Engineer" in text and "EU Citizen" in text and "igonildo7" in text:
-        if para.runs:
-            for run in para.runs:
-                run.text = ""
-            para.runs[0].text = "Backend Software Engineer | C# / .NET | EU Citizen | +55(75)999823805 | igonildo7@gmail.com "
-            if len(para.runs) >= 5:
-                para.runs[4].text = "\n"
-            if len(para.runs) >= 6:
-                para.runs[5].text = "\n"
-            if len(para.runs) >= 7:
-                para.runs[6].text = "LINKS"
-        for hl in para._element.findall(qn('w:hyperlink')):
-            for r in hl.findall(qn('w:r')):
-                t = r.find(qn('w:t'))
-                if t is not None:
-                    t.text = ""
+        replace_resume_subtitle(
+            para,
+            "Backend Software Engineer | C# / .NET | EU Citizen | +55(75)999823805 | igonildo7@gmail.com ",
+        )
         continue
 
     # Direct paragraph replacements (summary + titles)
     matched = False
     for old, new in paragraph_replacements.items():
         if old.strip() == text:
-            replace_text_preserving_format(para, new)
+            set_paragraph_text(para, new)
             matched = True
             break
     if matched:
@@ -122,7 +101,7 @@ for para in doc.paragraphs:
     # Bullet replacements
     for old, new in bullet_replacements.items():
         if old.strip() == text:
-            replace_text_preserving_format(para, new)
+            set_paragraph_text(para, new)
             matched = True
             break
     if matched:
@@ -131,7 +110,7 @@ for para in doc.paragraphs:
     # Standalone replacements
     for old, new in standalone_replacements.items():
         if old.strip() == text:
-            replace_text_preserving_format(para, new)
+            set_paragraph_text(para, new)
             break
 
 
@@ -166,7 +145,8 @@ for table in doc.tables:
                             r.text = ""
 
             elif "Cloud" in label or "DevOps" in label:
-                labels = ["Cloud & Messaging:", "DevOps & Tools:", "Graphics & 3D (background):"]
+                labels = ["Cloud & Messaging:", "DevOps & Tools:",
+                          "Graphics & 3D (background):"]
                 values = [
                     "AWS (Lambda, API Gateway, SQS, DynamoDB, CloudWatch), Message Queues (SQS / Kafka concepts), Serverless, Observability (logging / tracing / monitoring)",
                     "Docker, CI/CD (GitHub Actions / GitLab), Git, Linux fundamentals, AI-assisted development",
@@ -174,14 +154,16 @@ for table in doc.tables:
                 ]
                 for pi, para in enumerate(cells[0].paragraphs):
                     if para.runs:
-                        para.runs[0].text = labels[pi] if pi < len(labels) else ""
+                        para.runs[0].text = labels[pi] if pi < len(
+                            labels) else ""
                         for r in para.runs[1:]:
                             r.text = ""
                     elif pi < len(labels):
                         para.add_run(labels[pi])
                 for pi, para in enumerate(cells[1].paragraphs):
                     if para.runs:
-                        para.runs[0].text = values[pi] if pi < len(values) else ""
+                        para.runs[0].text = values[pi] if pi < len(
+                            values) else ""
                         for r in para.runs[1:]:
                             r.text = ""
                     elif pi < len(values):

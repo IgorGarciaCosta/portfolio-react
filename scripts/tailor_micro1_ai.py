@@ -13,7 +13,7 @@ Honesty note: keeps all claims truthful. AI experience is framed around the real
 LLM/API integration work (Cafundo) and computer-vision projects already on the CV.
 """
 from docx import Document
-from docx.oxml.ns import qn
+from docx_utils import set_paragraph_text
 
 INPUT = r"C:\Users\ISILV125\Downloads\05_Pessoal\Curriculum\CurriculumRelated\IgorGarcia_Software_Development_Engineer.docx"
 OUTPUT = r"C:\Users\ISILV125\Downloads\05_Pessoal\Curriculum\CurriculumRelated\IgorGarcia_Software_Development_Engineer-micro1.docx"
@@ -82,17 +82,6 @@ standalone_replacements = {
 }
 
 
-def replace_text_preserving_format(para, new_text):
-    """Clear all runs and set new text on the first run, keeping its formatting."""
-    if para.runs:
-        for run in para.runs:
-            run.text = ""
-        para.runs[0].text = new_text
-        return True
-    para.text = new_text
-    return True
-
-
 # Apply paragraph-level replacements
 for para in doc.paragraphs:
     text = para.text.strip()
@@ -107,7 +96,7 @@ for para in doc.paragraphs:
     matched = False
     for old, new in paragraph_replacements.items():
         if old.strip() == text:
-            replace_text_preserving_format(para, new)
+            set_paragraph_text(para, new)
             matched = True
             break
     if matched:
@@ -115,7 +104,7 @@ for para in doc.paragraphs:
 
     for old, new in bullet_replacements.items():
         if old.strip() == text:
-            replace_text_preserving_format(para, new)
+            set_paragraph_text(para, new)
             matched = True
             break
     if matched:
@@ -123,7 +112,7 @@ for para in doc.paragraphs:
 
     for old, new in standalone_replacements.items():
         if old.strip() == text:
-            replace_text_preserving_format(para, new)
+            set_paragraph_text(para, new)
             break
 
 

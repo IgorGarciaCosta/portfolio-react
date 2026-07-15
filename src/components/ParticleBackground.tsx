@@ -1,39 +1,14 @@
 // src/components/ParticleBackground.tsx
-import { useEffect, useMemo, useRef } from "react";
+import type { ComponentProps } from "react";
 import Particles from "@tsparticles/react";
-import { loadAll } from "@tsparticles/all";
-import {
-  tsParticles,
-  type Engine,
-  type ISourceOptions,
-} from "@tsparticles/engine";
-import { useTheme } from "@/hooks/useTheme";
 
-export default function ParticleBackground() {
-  /* 1. load plugins once */
-  const loaded = useRef(false);
-  useEffect(() => {
-    if (!loaded.current) {
-      loadAll(tsParticles as unknown as Engine).finally(() => {
-        loaded.current = true;
-      });
-    }
-  }, []);
-
-  /* 2. theme via context */
-  const { applied } = useTheme();
-  const isDark = applied === "dark";
-
-  /* 4. options — WITHOUT fullScreen  */
-  const options = useMemo<ISourceOptions>(() => {
-    const color = isDark ? "#ffffff" : "#0f172a";
-    return {
+const options: NonNullable<ComponentProps<typeof Particles>["options"]> = {
       /* fullScreen disabled: the canvas fills only the container */
       fullScreen: { enable: false },
       fpsLimit: 60,
       particles: {
         number: { value: 120, density: { enable: true, width: 900 } },
-        color: { value: color },
+        color: { value: "#ffffff" },
         opacity: { value: { min: 0.4, max: 0.8 } },
         size: { value: { min: 1, max: 4 } },
         shape: { type: "circle" },
@@ -56,16 +31,15 @@ export default function ParticleBackground() {
         },
       },
       detectRetina: true,
-    };
-  }, [isDark]);
+};
 
+export default function ParticleBackground() {
   /* 5. canvas limited to the container (100% of the Home area) */
   return (
-    <div className="absolute inset-0 -z-10 h-full w-full">
+    <div className="absolute inset-0 -z-10 h-full w-full invert dark:invert-0">
       <Particles
         id="tsparticles"
         options={options}
-        key={isDark ? "d" : "l"}
         style={{ width: "100%", height: "100%" }}
       />
     </div>

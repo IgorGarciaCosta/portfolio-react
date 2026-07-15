@@ -1,6 +1,5 @@
 /* ----------------- components/ProjectCard.tsx ----------------- */
 import { useState } from "react";
-import { ResponsiveIframe } from "@/components/ResponsiveIframe";
 import { ImageCarousel } from "@/components/ImageCarousel";
 import {
   FaPlay,
@@ -60,7 +59,13 @@ export function ProjectCard({
         <ImageCarousel images={images} alt={title} />
       ) : videoSrc ? (
         playing ? (
-          <ResponsiveIframe src={videoSrc} title={title} />
+          <iframe
+            src={`${videoSrc}${videoSrc.includes("?") ? "&" : "?"}autoplay=1`}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="aspect-video w-full"
+          />
         ) : (
           <button
             type="button"
